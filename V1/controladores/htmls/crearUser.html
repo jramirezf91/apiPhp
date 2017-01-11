@@ -1,6 +1,6 @@
 <form name="formulario" ng-submit="registrar()">
     <div class="form-group">
-        DNI: <input type="text" class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true" ng-maxlength="9" ng-minlength="9" ng-pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
+        DNI: <input type="text" class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true" ng-maxlength="9" ng-minlength="9" ng-pattern="/(^[X-Z]\d{7}[A-Z]$)|(^\d{8}[A-Z]$)/">
         <span ng-show="formulario.DNI.$error.required && formulario.DNI.$dirty">El dni es necesario.</span>
         <span ng-show="formulario.DNI.$error.maxlength">Debe contener 9 caracteres como maximo..</span>
         <span ng-show="formulario.DNI.$error.minlength">Debe contener 9 caracteres como minimo.</span>

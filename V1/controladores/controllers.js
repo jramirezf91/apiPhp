@@ -83,34 +83,43 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
 
 empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
 
-    function registrar() {
-        if(!existUsuario($routeParams.DNI)){
+    $scope.registrar = function() {
+
+        console.log($scope.Permiso);
+        console.log($scope.DNI);
+        console.log($scope.Nombre);
+        console.log($scope.Apellido);
+        console.log($scope.Pass);
+        console.log($scope.Direccion);
+
+
+        if(!existUsuario($scope.DNI)){
             var permi;
-            if($routeParams.Permiso == 1){
+            if($scope.Permiso == 1){
                 permi = "Si";
             }else{
                 permi = "no";
             }
 
-            if(angular.equals($routeParams.Pass, $routeParams.PassR)){
+            if(angular.equals($scope.Pass, $scope.PassR)){
 
                 var user = {
-                        DNI: $routeParams.DNI,
-                        nombre: $routeParams.Nombre,
-                        apellido: $routeParams.Apellido,
-                        contrasena: $routeParams.Pass,
-                        direccion: $routeParams.Direccion,
+                        DNI: $scope.DNI,
+                        nombre: $scope.Nombre,
+                        apellido: $scope.Apellido,
+                        contrasena: $scope.Pass,
+                        direccion: $scope.Direccion,
                         permiso: permi
                 };
 
-                http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
+                $http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
                     if(r.data.estado == 1){
                         alert(r.data.mensaje);
                         $location.path("/user");
                     }else if(r.data.estado == 6){
                         alert(r.data.mensaje);
                     }
-                })
+                });
 
             }else{
                 alert("Las contraseñas no coinciden.");
@@ -121,7 +130,7 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
         }else{
             alert("El usuario que desea registrar ya existe en la base de datos.");
         }
-    }
+    };
 
 
     function existUsuario($dni){
