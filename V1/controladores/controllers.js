@@ -94,7 +94,6 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
 
         if(!existUsuario($scope.DNI)){
-
             console.log("entro if");
             var permi;
             if($scope.Permiso == 1){
