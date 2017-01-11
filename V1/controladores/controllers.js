@@ -94,6 +94,8 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
 
         if(!existUsuario($scope.DNI)){
+
+            console.log("entro if");
             var permi;
             if($scope.Permiso == 1){
                 permi = "Si";
@@ -135,7 +137,11 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
     function existUsuario($dni){
 
-        $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $dni).then(function (r) {
+        var data = {
+            DNI: $dni
+        }
+
+        $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', data).then(function (r) {
             if(r.data.estado == 1){
                 return true;
             }else{
