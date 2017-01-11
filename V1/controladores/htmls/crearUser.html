@@ -1,27 +1,43 @@
-<form ng-submit="registrar()">
+<form name="formulario" ng-submit="registrar()">
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true">
+        DNI: <input type="text" class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true" ng-maxlength="9" ng-minlength="9" ng-pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))">
+        <span ng-show="formulario.DNI.$error.required && formulario.DNI.$dirty">El dni es necesario.</span>
+        <span ng-show="formulario.DNI.$error.maxlength">Debe contener 9 caracteres como maximo..</span>
+        <span ng-show="formulario.DNI.$error.minlength">Debe contener 9 caracteres como minimo.</span>
+        <span ng-show="formulario.DNI.$error.pattern">No es un dni valido.</span>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true">
+        Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^[a-zA-Z]*$/">
+        <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
+        <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
+        <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
+        <span ng-show="formulario.Nombre.$error.pattern">No es un nombre valido.</span>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Apellido" ng-model="Apellido" ng-required="true">
+        Apellido: <input type="text" class="form-control" placeholder="Apellido" ng-model="Apellido" ng-required="true" ng-maxlength="50" ng-minlength="3" ng-pattern="/^[a-zA-Z]*$/">
+        <span ng-show="formulario.Apellido.$error.required && fomulario.Apellido.$dirty">El nombre es necesario.</span>
+        <span ng-show="formulario.Apellido.$error.maxlength">Debe contener 50 caracteres como maximo..</span>
+        <span ng-show="formulario.Apellido.$error.minlength">Debe contener 3 caracteres como minimo.</span>
+        <span ng-show="formulario.Apellido.$error.pattern">No es un apellido valido.</span>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Direccion" ng-model="Direccion" ng-required="false">
+        Direccion: <input type="text" class="form-control" placeholder="Direccion" ng-model="Direccion" ng-required="false" ng-maxlength="100">
+        <span ng-show="formulario.Apellido.$error.maxlength">Debe contener 100 caracteres como maximo..</span>
     </div>
     <div class="form-group">
-        <select ng-model="Permiso" class="form-control">
+        Permiso: <select ng-model="Permiso" class="form-control">
             <option value="1">Administrador</option>
             <option value="0">Trabajador</option>
         </select>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Contraseña" ng-model="Pass" ng-required="true">
+        Contraseña: <input type="text" class="form-control" placeholder="Contraseña" ng-model="Pass" ng-required="true">
+        <span ng-show="formulario.Pass.$error.required && fomulario.Pass.$dirty">Campo necesario.</span>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Repetir Contraseña" ng-model="PassR" ng-required="true">
+        Repetir Contraseña: <input type="text" class="form-control" placeholder="Repetir Contraseña" ng-model="PassR" ng-required="true">
+        <span ng-show="formulario.PassR.$error.required && fomulario.PassR.$dirty">Campo necesario.</span>
     </div>
     <button type="submit" class="btn btn-default btn-block">Agregar</button>
+    <a href="#!/user" class="btn btn-default btn-block">Volver</a>
 </form>

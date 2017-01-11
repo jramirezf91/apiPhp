@@ -30,9 +30,6 @@ class usuarios
     const PERMISO = "Permiso";
 
     public static function post($peticion){
-
-
-
         if($peticion[0] == 'registro') {
             return self::registrar();
         } else if($peticion[0] == 'login'){

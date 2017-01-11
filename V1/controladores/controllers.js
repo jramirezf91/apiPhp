@@ -83,47 +83,56 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
 
 empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
 
-    if(existUsuario($routeParams.DNI)){
+    function registrar() {
+        if(!existUsuario($routeParams.DNI)){
+            var permi;
+            if($routeParams.Permiso == 1){
+                permi = "Si";
+            }else{
+                permi = "no";
+            }
+
+            if(angular.equals($routeParams.Pass, $routeParams.PassR)){
+
+                var user = {
+                        DNI: $routeParams.DNI,
+                        nombre: $routeParams.Nombre,
+                        apellido: $routeParams.Apellido,
+                        contrasena: $routeParams.Pass,
+                        direccion: $routeParams.Direccion,
+                        permiso: permi
+                };
+
+                http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
+                    if(r.data.estado == 1){
+                        alert(r.data.mensaje);
+                        $location.path("/user");
+                    }else if(r.data.estado == 6){
+                        alert(r.data.mensaje);
+                    }
+                })
+
+            }else{
+                alert("Las contraseñas no coinciden.");
+
+            }
 
 
+        }else{
+            alert("El usuario que desea registrar ya existe en la base de datos.");
+        }
     }
+
 
     function existUsuario($dni){
 
         $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $dni).then(function (r) {
-
-        })
-    }
-
-    var permi;
-    if($routeParams.Permiso == 1){
-        permi = "Si";
-    }else{
-        permi = "no";
-    }
-
-    if(angular.equals($routeParams.Pass, $routeParams.PassR)){
-
-        var user = {
-            DNI: $routeParams.DNI,
-            nombre: $routeParams.Nombre,
-            apellido: $routeParams.Apellido,
-            contrasena: $routeParams.Pass,
-            direccion: $routeParams.Direccion,
-            permiso: permi
-            }
-
-        %http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
             if(r.data.estado == 1){
-                $location.path("/user");
-            }else if(r.data.estado == 6){
-
+                return true;
+            }else{
+                return false;
             }
         })
-
-
-    }else{
-
     }
 
 }]);
