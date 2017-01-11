@@ -1,0 +1,27 @@
+<form ng-submit="registrar()">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Apellido" ng-model="Apellido" ng-required="true">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Direccion" ng-model="Direccion" ng-required="false">
+    </div>
+    <div class="form-group">
+        <select ng-model="Permiso" class="form-control">
+            <option value="1">Administrador</option>
+            <option value="0">Trabajador</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Contraseña" ng-model="Pass" ng-required="true">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Repetir Contraseña" ng-model="PassR" ng-required="true">
+    </div>
+    <button type="submit" class="btn btn-default btn-block">Agregar</button>
+</form>

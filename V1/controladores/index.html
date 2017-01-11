@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>Mantenimiento de empleados</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <div class="container">
+
+
+
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <h1 class="jumbotron">Mantenimiento de empleados</h1>
+
+                <div id="wrapper">
+                    <!-- Sidebar -->
+                    <div id="sidebar-wrapper">
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-brand">
+                                <a href="#!/user">
+                                    Usuarios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!/estructuras">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#">Shortcuts</a>
+                            </li>
+                            <li>
+                                <a href="#">Overview</a>
+                            </li>
+                            <li>
+                                <a href="#">Events</a>
+                            </li>
+                            <li>
+                                <a href="#">About</a>
+                            </li>
+                            <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /#sidebar-wrapper -->
+
+                <!-- Content body -->
+                <ng-view />
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="https://code.angularjs.org/1.6.1/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+</body>
+
+</html>

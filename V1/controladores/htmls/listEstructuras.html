@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Listado de estructuras
+    </div>
+    <table class="table table-bordered">
+        <tr ng-repeat="m in model.datos">
+            <td>{{m.idEstructura}}</td>
+            <td>{{m.Nombre}}</td>
+            <td>{{m.Direccion}}</td>
+            <td>
+                <a class="btn btn-default btn-xs" href="#!/estructuras/{{m.idEstructura}}">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </a>
+
+                <button class="btn btn-danger btn-xs" ng-click="retirar(m.idEstructura)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <a href="#!/" class="btn btn-default btn-block">Volver</a>
+</div>
