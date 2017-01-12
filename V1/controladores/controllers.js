@@ -103,13 +103,13 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
                 $http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
                     if(r.data.estado == 1){
                         alert(r.data.mensaje);
-                        //$location.path("/user");
                         $scope.DNI = "";
                         $scope.Nombre = "";
                         $scope.Apellido = "";
                         $scope.Pass = "";
                         $scope.Direccion = "";
                         $scope.PassR = "";
+                        $location.url("/user");
                     }else if(r.data.estado == 6){
                         alert(r.data.mensaje);
                     }
@@ -145,10 +145,12 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
     var id = angular.toJson($routeParams);
     console.log(id);
     datosUsuario(id);
+    var user;
 
-    function datosUsuario($idEstructura){
-        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
+    function datosUsuario($idUsuario){
+        $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $idUsuario).then(function (r) {
             console.log(r.data);
+            user = r.data.datos;
             $scope.DNI = r.data.datos.DNI;
             $scope.Nombre = r.data.datos.Nombre;
             $scope.Apellido = r.data.datos.Apellido;
@@ -158,7 +160,34 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
     }
     
     $scope.modificar = function () {
-        
+
+        var permi;
+        if($scope.Permiso == 1){
+            permi = "Si";
+        }else{
+            permi = "no";
+        }
+
+        if(angular.equals($scope.Pass, $scope.PassR)) {
+
+            var usuario = {
+                DNI: $scope.DNI,
+                nombre: $scope.Nombre,
+                apellido: $scope.Apellido,
+                contrasena: $scope.Pass,
+                direccion: $scope.Direccion,
+                permiso: permi
+            };
+
+            $http.put('http://localhost/apiPhp/V1/usuarios/' + id, usuario).then(function (r) {
+                if(r.data.estado == 1){
+                    alert(r.data.mensaje);
+                    $location.url("/user/" + id);
+                }else{
+                    alert(r.data.estado + ": " + r.data.mensaje);
+                }
+            })
+        }
     }
 }]);
 

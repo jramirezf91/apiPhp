@@ -405,11 +405,36 @@ class usuarios
     public static function actualizar($usuario, $idUsuario){
 
         try{
+
+            $DNI = $usuario->DNI;
+            $Nombre = $usuario->nombre;
+            $Apellido = $usuario->apellido;
+            $contrasena = $usuario->contrasena;
+
+            $direccion = $usuario->direccion;
+            if(strcmp($usuario->permiso, "Si")==0){
+                $permiso = 1;
+            }else{
+                $permiso = 0;
+            }
+
+            if(strcmp($contrasena, "") != 0){
+                $contrasenaEncriptada = self::encriptarContrasena($contrasena);
+                $consulta2 = "UPDATE " . self::NOMBRE_TABLA .
+                    " SET " . self::CONTRASENA . "=?," .
+                    " WHERE " . self::ID_USUARIO . "=?";
+                $sentencia2 = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($consulta2);
+
+                $sentencia2->bindParam(1, $contrasenaEncriptada);
+                $sentencia2->bindParam(2, $idUsuario);
+                $sentencia2->execute();
+
+            }
+
             $consulta = "UPDATE " . self::NOMBRE_TABLA .
                 " SET " .  self::DNI . "=?," .
                 self::NOMBRE . "=?," .
                 self::APELLIDO . "=?," .
-                self::CONTRASENA . "=?," .
                 self::DIRECCION . "=?," .
                 self::PERMISO . "=?" .
                 " WHERE " . self::ID_USUARIO . "=?";
@@ -419,22 +444,9 @@ class usuarios
             $sentencia->bindParam(1, $DNI);
             $sentencia->bindParam(2, $Nombre);
             $sentencia->bindParam(3, $Apellido);
-            $sentencia->bindParam(4, $contrasenaEncriptada);
-            $sentencia->bindParam(5, $direccion);
-            $sentencia->bindParam(6, $permiso);
-            $sentencia->bindParam(7, $idUsuario);
-
-            $DNI = $usuario->DNI;
-            $Nombre = $usuario->nombre;
-            $Apellido = $usuario->apellido;
-            $contrasena = $usuario->contrasena;
-            $contrasenaEncriptada = self::encriptarContrasena($contrasena);
-            $direccion = $usuario->direccion;
-            if(strcmp($usuario->permiso, "Si")==0){
-                $permiso = 1;
-            }else{
-                $permiso = 0;
-            }
+            $sentencia->bindParam(4, $direccion);
+            $sentencia->bindParam(5, $permiso);
+            $sentencia->bindParam(6, $idUsuario);
 
             $sentencia->execute();
 
