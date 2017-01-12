@@ -29,6 +29,10 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/crearUser.html',
               controller: 'registrarUserCtrl'
       })
+          .when('/modificar',{
+              templateURl: 'htmls/modificarUser.html',
+              controller: 'modificarUserCtrl'
+      })
           .otherwise({
           redirectTo: '/'
       });

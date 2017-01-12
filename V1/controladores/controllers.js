@@ -11,7 +11,6 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
     datosUsuario(id);
     
     function datosUsuario($idUsuario){
-
          $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $idUsuario).then(function (r) {
             console.log(r.data);
             $scope.model = r.data;
@@ -21,8 +20,7 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
 
 empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', function ($scope, $http) {
     
-    listadoUsuario();
-    
+    listadoUsuario();    
     
     function listadoUsuario(){
         $http.get('http://localhost:80/apiPhp/V1/usuarios/obtenerUsuarios').then(function (r) {
@@ -47,7 +45,6 @@ empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', fun
     listadoEstructuras();
 
     function listadoEstructuras() {
-
         $http.get('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructuras').then(function (r) {
             $scope.model = r.data;
         });
@@ -69,11 +66,9 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
 
     var id = angular.toJson($routeParams);
     console.log(id);
-    datosUsuario(id);
+    datosEstructura(id);
 
-    function datosUsuario($idEstructura){
-
-
+    function datosEstructura($idEstructura){
         $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
             console.log(r.data);
             $scope.model = r.data;
@@ -108,7 +103,13 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
                 $http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
                     if(r.data.estado == 1){
                         alert(r.data.mensaje);
-                        $location.path("/user");
+                        //$location.path("/user");
+                        $scope.DNI = "";
+                        $scope.Nombre = "";
+                        $scope.Apellido = "";
+                        $scope.Pass = "";
+                        $scope.Direccion = "";
+                        $scope.PassR = "";
                     }else if(r.data.estado == 6){
                         alert(r.data.mensaje);
                     }
@@ -116,21 +117,17 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
             }else{
                 alert("Las contraseñas no coinciden.");
-
             }
-
-
         }else{
             alert("El usuario que desea registrar ya existe en la base de datos.");
         }
     };
 
-
     function existUsuario($dni){
 
         var data = {
             DNI: $dni
-        }
+        };
 
         $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', data).then(function (r) {
             if(r.data.estado == 1){
@@ -142,3 +139,26 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
     }
 
 }]);
+
+empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
+
+    var id = angular.toJson($routeParams);
+    console.log(id);
+    datosUsuario(id);
+
+    function datosUsuario($idEstructura){
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
+            console.log(r.data);
+            $scope.DNI = r.data.datos.DNI;
+            $scope.Nombre = r.data.datos.Nombre;
+            $scope.Apellido = r.data.datos.Apellido;
+            $scope.Direccion = r.data.datos.Direccion;
+            $scope.Permiso = r.data.datos.Permiso;
+        })
+    }
+    
+    $scope.modificar = function () {
+        
+    }
+}]);
+
