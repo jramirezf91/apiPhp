@@ -85,16 +85,8 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
     $scope.registrar = function() {
 
-        console.log($scope.Permiso);
-        console.log($scope.DNI);
-        console.log($scope.Nombre);
-        console.log($scope.Apellido);
-        console.log($scope.Pass);
-        console.log($scope.Direccion);
-
-
         if(!existUsuario($scope.DNI)){
-            console.log("entro if");
+
             var permi;
             if($scope.Permiso == 1){
                 permi = "Si";
