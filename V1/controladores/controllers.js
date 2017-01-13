@@ -50,7 +50,6 @@ empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', fun
         });
     }
 
-
     $scope.retirar = function (id) {
         var v = 'http://localhost/apiPhp/V1/estructuras/' + id;
 
@@ -184,6 +183,93 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
                     alert(r.data.mensaje);
                     $location.url("/user/" + id);
                 }else{
+                    alert(r.data.estado + ": " + r.data.mensaje);
+                }
+            })
+        }
+    }
+}]);
+
+empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
+
+    $scope.registrarEs = function() {
+
+        if(!existEstructura($scope.Nombre)){
+
+           var user = {
+                Nombre: $scope.Nombre,
+                Direccion: $scope.Direccion,
+                Latitud: $scope.Latitud,
+                Longitud: $scope.Longitud
+            };
+
+            $http.post('http://localhost/apiPhp/V1/estructuras/registro', user).then(function (r) {
+                if(r.data.estado == 1){
+                    alert(r.data.mensaje);
+                    $scope.Nombre = "";
+                    $scope.Direccion = "";
+                    $scope.Latitud = "";
+                    $scope.Longitud = "";
+                    $location.url("/estructuras");
+                }else{
+                    alert(r.data.mensaje);
+                }
+            });
+        }else{
+            alert("La estructura que desea registrar ya existe en la base de datos.");
+        }
+    };
+
+    function existEstructura($nom){
+
+        var data = {
+            Nombre: $nom
+        };
+
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstrNom', data).then(function (r) {
+            if(r.data.estado == 0){
+                return true;
+            }else{
+                return false;
+            }
+        })
+    }
+
+}]);
+
+empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
+
+    var id = angular.toJson($routeParams);
+    console.log(id);
+    datosUsuario(id);
+    var estruct;
+
+    function datosUsuario($idEstructura){
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
+            console.log(r.data);
+            estruct = r.data.datos;
+            $scope.Nombre = r.data.datos.Nombre;
+            $scope.Latitud = r.data.datos.Latitud;
+            $scope.Direccion = r.data.datos.Direccion;
+            $scope.Longitud = r.data.datos.Longitud;
+        })
+    }
+
+    $scope.modificar = function () {
+
+        if(confirm('Esta seguro de modificar esta estructura?')){
+            var usuario = {
+                Nombre: $scope.Nombre,
+                Direccion: $scope.Direccion,
+                Latitud: $scope.Latitud,
+                Longitud: $scope.Longitud
+            };
+
+            $http.put('http://localhost/apiPhp/V1/estructuras/' + id, usuario).then(function (r) {
+                if (r.data.estado == 1) {
+                    alert(r.data.mensaje);
+                    $location.url("/estructuras/" + id);
+                } else {
                     alert(r.data.estado + ": " + r.data.mensaje);
                 }
             })

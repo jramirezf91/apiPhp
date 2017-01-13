@@ -41,8 +41,10 @@ class estructuras
             return self::anadirEstrUser();
         }else if($peticion[0] == 'eliminarEstrUser'){
             return self::eliminarEstrUser();
-        }else if($peticion[0] == 'obtenerEstruc'){
+        }else if($peticion[0] == 'obtenerEstruc') {
             return self::obtenerEstruc();
+        }else if($peticion[0] == 'obtenerEstrNom'){
+            return self::obtenerEstructurasNom();
         }else{
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA,
                 "Url mal formada", 400);
@@ -199,6 +201,42 @@ class estructuras
                         [
                             "estado" => self::ESTADO_NO_ENCONTRADO,
                             "datos" => "No existe la estructura"
+                        ];
+                }
+            }else{
+                throw  new ExcepcionApi(self::ESTADO_ERROR, "Se ha producido un error");
+            }
+
+        }catch (PDOException $e){
+            throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
+        }
+
+    }
+
+    public static function obtenerEstructurasNom(){
+
+
+        $body = file_get_contents('php://input');
+        $estructura = json_decode($body);
+        $NomEstruc = $estructura->NomEstructura;
+
+        try{
+            $comando = "SELECT * FROM " . self::NOMBRE_TABLA .
+                " WHERE " .self::NOMBRE . "=?";
+
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            $sentencia->bindParam(1, $NomEstruc);
+
+            if($sentencia->execute()){
+                if($sentencia->rowCount() == 0) {
+                    return
+                        [
+                            "estado" => 0
+                        ];
+                }else{
+                    return
+                        [
+                            "estado" => 1
                         ];
                 }
             }else{
