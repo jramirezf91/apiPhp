@@ -41,6 +41,10 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/modificarEstructura.html',
               controller: 'modificarEstructuraCtrl'
       })
+          .when('/login', {
+          templateUrl: 'login.html',
+          controller: 'loginCtrl'
+      })
           .otherwise({
           redirectTo: '/'
       });

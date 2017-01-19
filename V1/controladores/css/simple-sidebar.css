@@ -30,7 +30,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #f8f8f8;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -61,28 +61,35 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
+    border-top: 1px solid #e7e7e7;
+
 }
 
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
+
+    border-bottom: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+
 }
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999999;
+    color: #337ab7;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
+    color: #000000;
+    background: rgba(177, 177, 177, 0.2);
 }
 
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
-    text-decoration: none;
+    text-decoration: #eeeeee;
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -92,11 +99,11 @@ body {
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: #337ab7;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    color: #000000;
     background: none;
 }
 

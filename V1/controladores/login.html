@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nombre empresa</title>
+    <link href="css/estilo.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+
+<div class="wrapper">
+    <div id="imagen_portada"></div>
+
+    <div id="titulo_datos">
+    <p id="titulo">Por favor introduzca su nombre de usuario y contraseña </p>
+    </div>
+
+<div id="formulario_portada">
+    <!-- Como rellenar los campos
+        METHOD="POST" manda los datos al agente procesador almacenandolos en el cuerpo del formulario
+        METHOD="GET" mando los datos agregandolos a la url separandolos con una ?
+        ACTION indica la direccion a donde se mandaran los datos, se puede usar mailto: "la url que sea"
+        ENCTYPE es la encriptacion
+    -->
+    <FORM id="formulario_datos" METHOD="#" ACTION="#" ENCTYPE="#">
+        <ul id="credenciales">
+        <li><strong id="titulo_formulario">ID usuario</strong></li>
+        <!--Value para darle un valor predeterminado y Name es el nombre del elemento con el que se va a relacionar-->
+        <li><INPUT type="text" value="" name="#"></li>
+        <li id="formulario"><strong id="titulo_formulario">Contraseña</strong></li>
+        <li><INPUT type="password" value="" name="#"></li>
+        </ul>
+    </FORM>
+    <br><input type="button" value="Ingresar"></br>
+</div>
+</div>
+
+</body>

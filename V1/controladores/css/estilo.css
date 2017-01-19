@@ -1,0 +1,103 @@
+
+*{margin: 0; padding: 0;}
+
+html, body, div, span, h1, h2, p, img, strong, ul, li, article, footer, header, nav, section{
+	vertical-align: baseline;
+	font-size: inherit;
+}
+
+article, footer, header, nav, section
+{
+	display: block;
+}
+
+html{
+	overflow-y: scroll;
+	background-color: #F8F8F8;
+}
+
+body{
+	height: 100%;
+	padding-bottom: 20px;
+	font-family: sans-serif;
+}
+
+header{
+	width: 100%;
+	height: auto;
+	background-color: transparent;
+	margin-bottom: 25px;
+}
+
+.div_logo{
+	background: url(imagenes/logo3.png);
+	-webkit-background-size: cover;
+	background-size: cover;
+	width: 20%;
+	height: 100%;
+	float: left;
+	margin: 0 auto;
+}
+
+nav {
+
+	height: 100%;
+	width: 25%;
+	float: right;
+}
+
+div.wrapper{
+	width: 900px;
+	height: 100%;
+	border-style: ridge;
+	margin: 40px auto;
+	border-radius: 0.5em;
+}
+
+#imagen_portada{
+	background: url(portada.png) no-repeat;
+	width: 400px;
+	height: 227px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+#titulo_datos{
+	width: 95%;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #ff2021;
+	margin: 30px auto;
+}
+
+#titulo{
+	text-align: center;
+	font: 150% sans-serif;
+	color: #F8F8F8;
+	width: 100%;
+
+}
+
+#formulario_portada{
+	padding-left: 40%;
+	padding-top: 40px;
+	padding-bottom: 120px;
+}
+li{
+	list-style: none;
+	list-style-image: none;
+}
+
+footer{
+	background-color: black;
+	width: 100%;
+	height: 60px;
+}
+
+#formulario{
+	margin-top: 20px;
+}
+
+#credenciales{
+	font: 100% sans-serif;
+}

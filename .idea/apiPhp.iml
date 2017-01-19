@@ -18,5 +18,6 @@
     <orderEntry type="library" name="angular-route-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="angular-route" level="application" />
     <orderEntry type="library" name="angular" level="application" />
+    <orderEntry type="library" name="jquery-latest" level="application" />
   </component>
 </module>
