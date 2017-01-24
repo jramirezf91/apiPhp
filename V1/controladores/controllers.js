@@ -277,9 +277,8 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
     }
 }]);
 
-empleadoControllers.controller('loginCtrl',
-    ['$scope', '$rootScope', '$location', '$cookieStore', '$http',
-        function ($scope, $rootScope, $location, $cookieStore, $http) {
+empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location', '$cookieStore', '$http',
+    function ($scope, $rootScope, $location, $cookieStore, $http) {
             // reset login status
             $rootScope.globals = {};
             $cookieStore.remove('globals');
@@ -290,7 +289,7 @@ empleadoControllers.controller('loginCtrl',
                 var $credenciales = {
                     DNI : $scope.DNI,
                     contrasena : $scope.pass
-                }
+                };
 
                 $http.post('http://localhost/apiPhp/V1//usuarios/login', $credenciales).then(function(r) {
                     if(r.data.estado == 1) {
@@ -301,9 +300,9 @@ empleadoControllers.controller('loginCtrl',
                             }
                         };
                         if(r.data.usuario.Permiso == 1){
-                            $location.path('/admin');
-                        }else {
                             $location.path('/');
+                        }else {
+                            $location.path('/user');
                         }
                     } else {
                         $scope.error = r.data.message;
