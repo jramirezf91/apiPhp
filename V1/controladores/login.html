@@ -27,7 +27,7 @@
     -->
     <FORM name="formulario_datos" ng-submit="login()">
         <ul id="credenciales">
-        <li><strong id="titulo_formulario">ID usuario</strong></li>
+        <li><strong id="titulo_formulario">DNI</strong></li>
         <!--Value para darle un valor predeterminado y Name es el nombre del elemento con el que se va a relacionar-->
         <li><INPUT type="text"  class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true" ></li>
             <span ng-show="formulario_datos.DNI.$dirty && formulario_datos.DNI.$error.required" class="help-block">Username is required</span>

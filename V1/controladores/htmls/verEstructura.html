@@ -1,17 +1,50 @@
-<h2 class="page-header">
-    {{ model.datos.Nombre }}
-</h2>
+<!-- Sidebar -->
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#!/">
+                    Principal
+                </a>
+            </li>
+            <li>
+                <a href="#!/estructuras">Estructuras</a>
+            </li>
+            <li>
+                <a href="#!/user">Usuarios</a>
+            </li>
+        </ul>
+    </div>
 
-<a href="#!/estructuras" class="btn btn-default btn-block">Volver</a>
+    <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Listado de empleados
+                        </div>
+                        <h2 class="page-header">
+                            {{ model.datos.Nombre }}
+                        </h2>
 
-<dl>
-    <dt>Nombre</dt>
-    <dd>{{ model.datos.Nombre }}</dd>
-    <dt>Dirreccion</dt>
-    <dd>{{ model.datos.Direccion }}</dd>
-    <dt>Latitud</dt>
-    <dd>{{ model.datos.Latitud }}</dd>
-    <dt>Longitud</dt>
-    <dd>{{ model.datos.Longitud }}</dd>
+                        <a href="#!/estructuras" class="btn btn-default btn-block">Volver</a>
 
-</dl>
+                        <dl>
+                            <dt>Nombre</dt>
+                            <dd>{{ model.datos.Nombre }}</dd>
+                            <dt>Dirreccion</dt>
+                            <dd>{{ model.datos.Direccion }}</dd>
+                            <dt>Latitud</dt>
+                            <dd>{{ model.datos.Latitud }}</dd>
+                            <dt>Longitud</dt>
+                            <dd>{{ model.datos.Longitud }}</dd>
+
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
