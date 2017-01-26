@@ -16,6 +16,12 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
             $scope.model = r.data;
         })
     }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 }]);
 
 empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', function ($scope, $http) {
@@ -38,6 +44,12 @@ empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', functi
             });
         }
     }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 }]);
 
 empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', function ($scope,  $http) {
@@ -59,6 +71,12 @@ empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', fun
             });
         }
     }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 }]);
 
 empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
@@ -73,6 +91,12 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
             $scope.model = r.data;
         })
     }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 }]);
 
 empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
@@ -137,6 +161,12 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
         })
     }
 
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+
 }]);
 
 empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
@@ -188,6 +218,12 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
             })
         }
     }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 }]);
 
 empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
@@ -235,6 +271,12 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
         })
     }
 
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+
 }]);
 
 empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
@@ -275,6 +317,12 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
             })
         }
     }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 }]);
 
 empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location', '$cookieStore', '$http',
@@ -282,7 +330,7 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
             // reset login status
             $rootScope.globals = {};
             $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            //$http.defaults.headers.common.Authorization = 'Basic ';
 
             $scope.login = function () {
                 $scope.dataLoading = true;
@@ -299,6 +347,7 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                                 permiso: r.data.usuario.Permiso
                             }
                         };
+                        $cookieStore.put('globals', $rootScope.globals);
                         if(r.data.usuario.Permiso == 1){
                             $location.path('/');
                         }else {

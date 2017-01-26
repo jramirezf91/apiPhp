@@ -53,7 +53,7 @@ app.config(['$routeProvider',
 }]);
 
 
-app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
+app.run(['$rootScope', '$location', '$cookieStore', function ($rootScope, $location, $cookieStore) {
 
     $rootScope.globals = $cookieStore.get('globals') || {};
 
@@ -65,3 +65,15 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScop
     });
     
 }]);
+
+app.factory("auth", function ($cookies, $cookieStore, $location) {
+    return{
+        logout : function () {
+            $cookieStore.remove("id");
+            $cookieStore.remove("permiso");
+
+            $location.path('/login');
+        }
+    }
+    
+});

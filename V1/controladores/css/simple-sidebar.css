@@ -45,6 +45,7 @@ body {
     width: 100%;
     position: absolute;
     padding: 15px;
+    border-radius: 0.5em;
 }
 
 #wrapper.toggled #page-content-wrapper {
