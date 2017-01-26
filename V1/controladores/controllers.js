@@ -310,4 +310,4 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                     }
                 });
             };
-        }]);
+    }]);

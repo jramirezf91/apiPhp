@@ -56,9 +56,6 @@ app.config(['$routeProvider',
 app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
 
     $rootScope.globals = $cookieStore.get('globals') || {};
-    if ($rootScope.globals.usuario) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.usuario.permiso; // jshint ignore:line
-    }
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         // redirect to login page if not logged in
