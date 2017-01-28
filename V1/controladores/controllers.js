@@ -15,6 +15,10 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
             console.log(r.data);
             $scope.model = r.data;
         })
+
+        $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', $idUsuario).then(function (r) {
+            $scope.estruc = r.data;
+        });
     }
 
     $scope.logout = function()
@@ -388,6 +392,77 @@ empleadoControllers.controller('useriniCtrl', ['$scope', '$http', 'auth', '$root
 }]);
 
 empleadoControllers.controller('admininiCtrl', ['$scope', '$http', 'auth', function ($scope,  $http, auth) {
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('addestrucCtrl', ['$scope', '$http', 'auth', '$routeParams', function ($scope,  $http, auth, $routeParams) {
+
+
+    var id = angular.toJson($routeParams);
+
+    $scope.idu = id;
+
+    listadoEstructurassinusuario();
+
+    function listadoEstructurassinusuario() {
+        $http.get('http://localhost:80/apiPhp/V1/estructuras/estructurasSinUsuario').then(function (r) {
+            $scope.estruc = r.data;
+        });
+    }
+
+    $scope.anadir = function (idEstruc, iduser) {
+        var v =
+            {
+                idUsuario: iduser,
+                estructura: idEstruc
+            };
+
+        if(confirm('Esta seguro añadir esta estructura?')){
+            $http.post('http://localhost/apiPhp/V1/estructuras/anadirEstrUser', v ).then(function (r) {
+                listadoEstructurassinusuario();
+            });
+        }
+    };
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('delestrucCtrl', ['$scope', '$http', 'auth', '$routeParams', function ($scope,  $http, auth, $routeParams) {
+
+    var id = angular.toJson($routeParams);
+    listadoEstructurasUsuario(id);
+
+    function listadoEstructurasUsuario($idUsuario) {
+        $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', $idUsuario).then(function (r) {
+            $scope.estruc = r.data;
+        });
+    }
+
+    $scope.delete = function (idEstruc, iduser) {
+        var v =
+            {
+                idUsuario: iduser,
+                estructura: idEstruc
+            };
+
+        if(confirm('Esta seguro eliminar esta estructura?')){
+            $http.post('http://localhost/apiPhp/V1/estructuras/eliminarEstrUser', v ).then(function (r) {
+                listadoEstructurasUsuario();
+            });
+        }
+    };
+
 
 
     $scope.logout = function()

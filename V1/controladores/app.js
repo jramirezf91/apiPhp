@@ -52,6 +52,14 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/userini.html',
               controller: 'useriniCtrl'
       })
+          .when('/addEstruc/:idUsuario', {
+              templateUrl: 'htmls/addEstruc.html',
+              controller: 'addestrucCtrl'
+      })
+          .when('/delEstruc/:idUsuario', {
+              templateUrl: 'htmls/delEstruc.html',
+              controller: 'delestrucCtrl'
+      })
           .otherwise({
           redirectTo: '/login'
       });

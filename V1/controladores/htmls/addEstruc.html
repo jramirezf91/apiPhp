@@ -31,44 +31,24 @@
                         <div class="panel-heading">
                             Listado de empleados
                         </div>
-                        <h2 class="page-header">
-                            {{ model.datos.Nombre }}
-                        </h2>
-                        <dl>
-                            <dt>Nombre</dt>
-                            <dd>{{ model.datos.Nombre }}</dd>
-                            <dt>Apellido</dt>
-                            <dd>{{ model.datos.Apellido }}</dd>
-                            <dt>DNI</dt>
-                            <dd>{{ model.datos.DNI }}</dd>
-                            <dt>Domicilio</dt>
-                            <dd>{{ model.datos.Direccion }}</dd>
-                            <dt>Permisos</dt>
-                            <dd ng-if="model.datos.Permiso == 1">Administrador</dd>
-                            <dd ng-if="model.datos.Permiso == 0">Trabajador</dd>
-
-                        </dl>
-
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Listado de estructuras
+                                Listado de estructuras sin asignar
                             </div>
                             <table class="table table-bordered">
                                 <tr ng-repeat="m in estruc.datos">
                                     <td>{{m.Nombre}}</td>
+                                    <td>{{m.Direccion}}</td>
+                                    <td>
+                                        <button class="btn btn-default btn-xs" ng-click="anadir(m.idEstructura, idu.idUsuario)">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             </table>
 
-                            <a class="btn btn-default btn-xs" href="#!/addEstruc/{{ model.datos.idUsuario}}">
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </a>
-
-                            <a class="btn btn-default btn-xs" href="#!/delEstruc/{{ model.datos.idUsuario}}">
-                                <i class="glyphicon glyphicon-minus"></i>
-                            </a>
+                            <a href="#!/user/{{idu.idUsuario}}" class="btn btn-default btn-block">Volver</a>
                         </div>
-
-                        <a href="#!/user" class="btn btn-default btn-block">Volver</a>
                     </div>
                 </div>
             </div>
