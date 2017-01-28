@@ -50,8 +50,8 @@ if(!in_array($recurso, $recursos_existentes)){
 
 $metodo = strtolower($_SERVER['REQUEST_METHOD']);
 
-echo $recurso . " --- " . $peticion[0] . " ---- " . $_POST['data'] .
-" --- ".  $metodo . "\n";
+//echo $recurso . " --- " . $peticion[0] . " ---- " . $_POST['data'] .
+//" --- ".  $metodo . "\n";
 
 switch ($metodo){
     case 'get':

@@ -32,8 +32,8 @@
         <li><INPUT type="text"  class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true" ></li>
             <span ng-show="formulario_datos.DNI.$dirty && formulario_datos.DNI.$error.required" class="help-block">Username is required</span>
         <li id="formulario"><strong id="titulo_formulario">Contraseña</strong></li>
-        <li><INPUT type="password"  class="form-control" placeholder="pass" ng-model="pass" ng-required="true" ></li>
-            <span ng-show="formulario_datos.pass.$dirty && formulario_datos.pass.$error.required" class="help-block">Password is required</span>
+        <li><INPUT type="password"  class="form-control" placeholder="password" ng-model="password" ng-required="true" ></li>
+            <span ng-show="formulario_datos.password.$dirty && formulario_datos.password.$error.required" class="help-block">Password is required</span>
         </ul>
         <br><button type="submit" ng-disabled="formulario_datos.$invalid || dataLoading" class="btn btn-danger" >Ingresar</button></br>
     </FORM>

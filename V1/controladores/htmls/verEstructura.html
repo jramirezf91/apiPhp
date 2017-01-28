@@ -8,6 +8,9 @@
                 </a>
             </li>
             <li>
+                <a href="#!/user/{{globals.usuario.id}}">Perfil</a>
+            </li>
+            <li>
                 <a href="#!/estructuras">Estructuras</a>
             </li>
             <li>
@@ -32,8 +35,6 @@
                             {{ model.datos.Nombre }}
                         </h2>
 
-                        <a href="#!/estructuras" class="btn btn-default btn-block">Volver</a>
-
                         <dl>
                             <dt>Nombre</dt>
                             <dd>{{ model.datos.Nombre }}</dd>
@@ -45,6 +46,8 @@
                             <dd>{{ model.datos.Longitud }}</dd>
 
                         </dl>
+
+                        <a href="#!/estructuras" class="btn btn-default btn-block">Volver</a>
                     </div>
                 </div>
             </div>

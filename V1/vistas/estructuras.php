@@ -313,7 +313,7 @@ class estructuras
         $idUser = $estructura->idUser;
 
         try{
-            $comando = "SELECT * FROM " . self::NOMBRE_TABLA .
+            $comando = "SELECT ". self::ID_ESTRUCTURA . "," . self::NOMBRE . " FROM " . self::NOMBRE_TABLA .
                 " WHERE " .self::USUARIO . "=?";
 
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
@@ -321,18 +321,18 @@ class estructuras
 
             if($sentencia->execute()){
                 if($sentencia->rowCount() > 0) {
-                    $usuarioBD = $sentencia->fetch(PDO::FETCH_ASSOC);
+                    $usuarioBD = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                     http_response_code(200);
 
-                    $respuesta["idEstructura"] = $usuarioBD["idEstructura"];
+                    /*$respuesta["idEstructura"] = $usuarioBD["idEstructura"];
                     $respuesta["Nombre"] = $usuarioBD["Nombre"];
                     $respuesta["Direccion"] = $usuarioBD["Direccion"];
                     $respuesta["Latitud"] = $usuarioBD["Latitud"];
-                    $respuesta["Longitud"] = $usuarioBD["Longitud"];
+                    $respuesta["Longitud"] = $usuarioBD["Longitud"];*/
                     return
                         [
                             "estado" => self::ESTADO_EXITO,
-                            "datos" => $respuesta
+                            "datos" => $usuarioBD
                         ];
                 }else{
                     return

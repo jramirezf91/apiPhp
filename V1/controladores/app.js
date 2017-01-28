@@ -8,8 +8,9 @@ var app = angular.module('myApp', [
 app.config(['$routeProvider',
     function($routeProvider) {
       $routeProvider.
-          when('/',{
-              templateUrl: 'htmls/botones.html'
+          when('/admin',{
+              templateUrl: 'htmls/botones.html',
+              controller: 'admininiCtrl'
       }).
        when('/user', {
         templateUrl: 'htmls/listado.html',
@@ -47,6 +48,10 @@ app.config(['$routeProvider',
           templateUrl: 'login.html',
           controller: 'loginCtrl'
       })
+          .when('/userini', {
+              templateUrl: 'htmls/userini.html',
+              controller: 'useriniCtrl'
+      })
           .otherwise({
           redirectTo: '/login'
       });
@@ -61,6 +66,14 @@ app.run(['$rootScope', '$location', '$cookieStore', function ($rootScope, $locat
         // redirect to login page if not logged in
         if ($location.path() !== '/login' && !$rootScope.globals.usuario) {
             $location.path('/login');
+        }
+
+        if($location.path() == '/'){
+            if($rootScope.globals.usuario.permiso == 1){
+                $location.path('/admin');
+            }else{
+                $location.path('/userini');
+            }
         }
     });
     

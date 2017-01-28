@@ -3,7 +3,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#!/">
+                <a href="#!/userini">
                     Principal
                 </a>
             </li>
@@ -11,10 +11,7 @@
                 <a href="#!/user/{{globals.usuario.id}}">Perfil</a>
             </li>
             <li>
-                <a href="#!/estructuras">Estructuras</a>
-            </li>
-            <li>
-                <a href="#!/user">Usuarios</a>
+                <a href="#!/userini">Estructuras</a>
             </li>
             <li>
                 <a ng-click="logout()">Salir</a>
@@ -28,30 +25,20 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                      <div class="panel-heading">
-                        Listado de empleados
-                      </div>
+                        <div class="panel-heading">
+                            Listado de estructuras
+                        </div>
                         <table class="table table-bordered">
                             <tr ng-repeat="m in model.datos">
-                                <td>{{m.idUsuario}}</td>
                                 <td>{{m.Nombre}}</td>
-                                <td>{{m.Apellido}}</td>
-                                <td>{{m.DNI}}</td>
-
                                 <td>
-                                    <a class="btn btn-default btn-xs" href="#!/user/{{m.idUsuario}}">
+                                    <a class="btn btn-default btn-xs" href="#!/estructuras/{{m.idEstructura}}">
                                         <i class="glyphicon glyphicon-eye-open"></i>
                                     </a>
 
-                                    <button class="btn btn-danger btn-xs" ng-click="retirar(m.idUsuario)">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                    </button>
                                 </td>
                             </tr>
                         </table>
-
-                        <a href="#!/" class="btn btn-default btn-block">Volver</a>
-                        <a href="#!/registrar" class="btn btn-default btn-block">Registrar</a>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
  */
 var empleadoControllers = angular.module('empleadoControllers', []);
 
-empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
+empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     console.log($routeParams);
     var id = angular.toJson($routeParams);
@@ -24,8 +24,8 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
 
 }]);
 
-empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', function ($scope, $http) {
-    
+empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
+
     listadoUsuario();    
     
     function listadoUsuario(){
@@ -43,7 +43,7 @@ empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', functi
                 listadoUsuario();
             });
         }
-    }
+    };
 
     $scope.logout = function()
     {
@@ -52,7 +52,7 @@ empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', functi
 
 }]);
 
-empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', function ($scope,  $http) {
+empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', 'auth', function ($scope,  $http, auth) {
 
     listadoEstructuras();
 
@@ -70,7 +70,7 @@ empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', fun
                 listadoEstructuras();
             });
         }
-    }
+    };
 
     $scope.logout = function()
     {
@@ -79,7 +79,7 @@ empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', fun
 
 }]);
 
-empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
+empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
@@ -99,7 +99,7 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
 
 }]);
 
-empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
+empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     $scope.registrar = function() {
 
@@ -169,7 +169,7 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
 }]);
 
-empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
+empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
@@ -184,7 +184,7 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
             $scope.Nombre = r.data.datos.Nombre;
             $scope.Apellido = r.data.datos.Apellido;
             $scope.Direccion = r.data.datos.Direccion;
-            $scope.Permiso = r.data.datos.Permiso;
+             $scope.Permiso = r.data.datos.Permiso;
         })
     }
     
@@ -226,7 +226,7 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
 
 }]);
 
-empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
+empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     $scope.registrarEs = function() {
 
@@ -279,7 +279,7 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
 
 }]);
 
-empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', function ($scope, $routeParams, $http) {
+empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
@@ -334,12 +334,13 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
 
             $scope.login = function () {
                 $scope.dataLoading = true;
-                var $credenciales = {
+                var credenciales = {
                     DNI : $scope.DNI,
-                    contrasena : $scope.pass
+                    contrasena : $scope.password
                 };
 
-                $http.post('http://localhost/apiPhp/V1//usuarios/login', $credenciales).then(function(r) {
+                $http.post('http://localhost/apiPhp/V1//usuarios/login', credenciales).then(function(r) {
+                    console.log("rootscope" + r.data.estado);
                     if(r.data.estado == 1) {
                         $rootScope.globals = {
                             usuario: {
@@ -347,11 +348,14 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                                 permiso: r.data.usuario.Permiso
                             }
                         };
+                        console.log("salir rootscope");
                         $cookieStore.put('globals', $rootScope.globals);
                         if(r.data.usuario.Permiso == 1){
-                            $location.path('/');
+                            console.log("permiso = 1");
+                            $location.path('/admin');
                         }else {
-                            $location.path('/user');
+                            console.log("permiso = 0");
+                            $location.path('/userini');
                         }
                     } else {
                         $scope.error = r.data.message;
@@ -360,3 +364,35 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                 });
             };
     }]);
+
+empleadoControllers.controller('useriniCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
+
+    listadoEstructurasUser($rootScope.globals.usuario.id);
+
+    function listadoEstructurasUser($id) {
+
+        var user = {
+            idUser: $id
+        };
+
+        $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', user).then(function (r) {
+            $scope.model = r.data;
+        });
+    }
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('admininiCtrl', ['$scope', '$http', 'auth', function ($scope,  $http, auth) {
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
