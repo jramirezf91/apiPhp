@@ -1,7 +1,7 @@
 /**
  * Created by Juanito-PC on 10/12/2016.
  */
-var empleadoControllers = angular.module('empleadoControllers', []);
+var empleadoControllers = angular.module('empleadoControllers', ['ngMap', 'chart.js']);
 
 empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
@@ -93,7 +93,14 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
         $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
             console.log(r.data);
             $scope.model = r.data;
-        })
+        });
+
+        $scope.map = {
+            center: { latitude: $scope.model.datos.Latitud, longitude: $scope.model.datos.Longitud },
+            zoom: 8
+        };
+
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     }
 
     $scope.logout = function()
@@ -458,12 +465,45 @@ empleadoControllers.controller('delestrucCtrl', ['$scope', '$http', 'auth', '$ro
 
         if(confirm('Esta seguro eliminar esta estructura?')){
             $http.post('http://localhost/apiPhp/V1/estructuras/eliminarEstrUser', v ).then(function (r) {
-                listadoEstructurasUsuario();
+                listadoEstructurasUsuario(iduser);
             });
         }
     };
 
 
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+
+    var id = angular.toJson($routeParams);
+    console.log(id);
+    datosEstructura(id);
+
+    function datosEstructura($idEstructura){
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstruc', $idEstructura).then(function (r) {
+            console.log(r.data);
+            $scope.model = r.data;
+        });
+
+        $scope.map = {
+            center: { latitude: $scope.model.datos.Latitud, longitude: $scope.model.datos.Longitud },
+            zoom: 8
+        };
+        var n = $scope.model.datos.Vibraciones;
+        for(var i = 0; i < n.length; i++){
+
+
+
+        }
+
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    }
 
     $scope.logout = function()
     {

@@ -60,6 +60,10 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/delEstruc.html',
               controller: 'delestrucCtrl'
       })
+          .when('/userestructuras/:idEstructura', {
+              templateUrl: 'htmls/userverstruct.html',
+              controller: 'userverEstructurasCtrl'
+      })
           .otherwise({
           redirectTo: '/login'
       });

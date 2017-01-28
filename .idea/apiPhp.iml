@@ -20,5 +20,9 @@
     <orderEntry type="library" name="angular" level="application" />
     <orderEntry type="library" name="jquery-latest" level="application" />
     <orderEntry type="library" name="angular-cookies" level="application" />
+    <orderEntry type="library" name="angular-google-maps" level="application" />
+    <orderEntry type="library" name="ng-map" level="application" />
+    <orderEntry type="library" name="Chart" level="application" />
+    <orderEntry type="library" name="angular-chart" level="application" />
   </component>
 </module>

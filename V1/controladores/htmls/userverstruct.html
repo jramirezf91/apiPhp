@@ -1,0 +1,65 @@
+<!-- Sidebar -->
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#!/userini">
+                    Principal
+                </a>
+            </li>
+            <li>
+                <a href="#!/user/{{globals.usuario.id}}">Perfil</a>
+            </li>
+            <li>
+                <a href="#!/userini">Estructuras</a>
+            </li>
+            <li>
+                <a ng-click="logout()">Salir</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Listado de empleados
+                        </div>
+                        <h2 class="page-header">
+                            {{ model.datos.Nombre }}
+                        </h2>
+
+                        <dl>
+                            <dt>Nombre</dt>
+                            <dd>{{ model.datos.Nombre }}</dd>
+                            <dt>Dirreccion</dt>
+                            <dd>{{ model.datos.Direccion }}</dd>
+                            <dt>Latitud</dt>
+                            <dd>{{ model.datos.Latitud }}</dd>
+                            <dt>Longitud</dt>
+                            <dd>{{ model.datos.Longitud }}</dd>
+
+                        </dl>
+                        <!-- apikey AIzaSyAAM2P5pP266EXVe2MC87nhu2j9F8PY5eU-->
+
+                        <ng-map zoom="11" center="[{{ model.datos.Latitud }}, {{ model.datos.Longitud }}]">
+                            <marker position="[{{ model.datos.Latitud }}, {{ model.datos.Longitud }}]" title = "{{ model.datos.Nombre }}"  />
+                            <control name="overviewMap" opened="true" />
+                        </ng-map>
+
+                        <canvas id="line" class="chart chart-line" chart-data="data"
+                                chart-labels="labels" chart-series="series" chart-options="options"
+                                chart-dataset-override="datasetOverride" chart-click="onClick">
+                        </canvas
+
+
+                        <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
