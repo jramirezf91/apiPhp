@@ -31,32 +31,22 @@
                         <h2 class="page-header">
                             {{ model.datos.Nombre }}
                         </h2>
-
                         <dl>
                             <dt>Nombre</dt>
                             <dd>{{ model.datos.Nombre }}</dd>
-                            <dt>Dirreccion</dt>
+                            <dt>Apellido</dt>
+                            <dd>{{ model.datos.Apellido }}</dd>
+                            <dt>DNI</dt>
+                            <dd>{{ model.datos.DNI }}</dd>
+                            <dt>Domicilio</dt>
                             <dd>{{ model.datos.Direccion }}</dd>
-                            <dt>Latitud</dt>
-                            <dd>{{ model.datos.Latitud }}</dd>
-                            <dt>Longitud</dt>
-                            <dd>{{ model.datos.Longitud }}</dd>
+                            <dt>Permisos</dt>
+                            <dd ng-if="model.datos.Permiso == 1">Administrador</dd>
+                            <dd ng-if="model.datos.Permiso == 0">Trabajador</dd>
 
                         </dl>
-                        <!-- apikey AIzaSyAAM2P5pP266EXVe2MC87nhu2j9F8PY5eU-->
 
-                        <ng-map zoom="11" center="[{{ model.datos.Latitud }}, {{ model.datos.Longitud }}]">
-                            <marker position="[{{ model.datos.Latitud }}, {{ model.datos.Longitud }}]" title = "{{ model.datos.Nombre }}"  />
-                            <control name="overviewMap" opened="true" />
-                        </ng-map>
-
-                        <canvas id="line" class="chart chart-line" chart-data="data"
-                                chart-labels="labels" chart-series="series" chart-options="options"
-                                chart-dataset-override="datasetOverride" chart-click="onClick">
-                        </canvas>
-
-
-                        <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
+                        <a href="#!/user" class="btn btn-default btn-block">Volver</a>
                     </div>
                 </div>
             </div>

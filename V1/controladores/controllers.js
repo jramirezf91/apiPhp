@@ -14,7 +14,7 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
          $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $idUsuario).then(function (r) {
             console.log(r.data);
             $scope.model = r.data;
-        })
+        });
 
         $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', $idUsuario).then(function (r) {
             $scope.estruc = r.data;

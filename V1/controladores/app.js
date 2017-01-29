@@ -64,6 +64,10 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/userverstruct.html',
               controller: 'userverEstructurasCtrl'
       })
+          .when('/perfil/:idUsuario', {
+              templateUrl: 'htmls/perfil.html',
+              controller: 'datosUsuarioCtrl'
+      })
           .otherwise({
           redirectTo: '/login'
       });
