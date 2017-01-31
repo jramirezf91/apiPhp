@@ -17,6 +17,7 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
         });
 
         $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', $idUsuario).then(function (r) {
+            console.log(r.data);
             $scope.estruc = r.data;
         });
     }
@@ -95,12 +96,12 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
             $scope.model = r.data;
         });
 
-        $scope.map = {
+        /*$scope.map = {
             center: { latitude: $scope.model.datos.Latitud, longitude: $scope.model.datos.Longitud },
             zoom: 8
-        };
+        };*/
 
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+         $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     }
 
     $scope.logout = function()
@@ -413,7 +414,9 @@ empleadoControllers.controller('addestrucCtrl', ['$scope', '$http', 'auth', '$ro
 
     var id = angular.toJson($routeParams);
 
-    $scope.idu = id;
+    $scope.idu = $routeParams.idUsuario;
+    console.log("idusuario:");
+    console.log($scope.idu);
 
     listadoEstructurassinusuario();
 
@@ -448,6 +451,7 @@ empleadoControllers.controller('addestrucCtrl', ['$scope', '$http', 'auth', '$ro
 empleadoControllers.controller('delestrucCtrl', ['$scope', '$http', 'auth', '$routeParams', function ($scope,  $http, auth, $routeParams) {
 
     var id = angular.toJson($routeParams);
+    $scope.idu = $routeParams.idUsuario;
     listadoEstructurasUsuario(id);
 
     function listadoEstructurasUsuario($idUsuario) {
@@ -491,7 +495,7 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
             $scope.model = r.data;
         });
 
-        $scope.map = {
+        /*$scope.map = {
             center: { latitude: $scope.model.datos.Latitud, longitude: $scope.model.datos.Longitud },
             zoom: 8
         };
@@ -502,7 +506,7 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
 
         }
 
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];*/
     }
 
     $scope.logout = function()

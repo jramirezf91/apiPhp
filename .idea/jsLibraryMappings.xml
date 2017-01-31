@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Chart, angular, angular-DefinitelyTyped, angular-chart, angular-cookies, angular-google-maps, angular-route, angular-route-DefinitelyTyped, jquery-latest, ng-map}" />
+    <file url="PROJECT" libraries="{Chart, angular, angular-chart, angular-cookies, angular-route, ng-map}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
-    <includedPredefinedLibrary name="Node.js Core" />
     <includedPredefinedLibrary name="WebGL" />
   </component>
 </project>

@@ -14,7 +14,7 @@
                 <a href="#!/estructuras">Estructuras</a>
             </li>
             <li>
-                <a href="#!/user">Usuarios</a>
+                <a href="#!/user">Trabajadores</a>
             </li>
             <li>
                 <a ng-click="logout()">Salir</a>
@@ -28,12 +28,10 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Listado de empleados
-                        </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Listado de estructuras sin asignar
+                                <td>{{idu.idUsuario}}</td>
                             </div>
                             <table class="table table-bordered">
                                 <tr ng-repeat="m in estruc.datos">
@@ -47,7 +45,7 @@
                                 </tr>
                             </table>
 
-                            <a href="#!/user/{{idu.idUsuario}}" class="btn btn-default btn-block">Volver</a>
+                            <a href="#!/user/{{idu}}" class="btn btn-default btn-block">Volver</a>
                         </div>
                     </div>
                 </div>

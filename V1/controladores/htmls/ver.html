@@ -14,7 +14,7 @@
                 <a href="#!/estructuras">Estructuras</a>
             </li>
             <li>
-                <a href="#!/user">Usuarios</a>
+                <a href="#!/user">Trabajadores</a>
             </li>
             <li>
                 <a ng-click="logout()">Salir</a>
@@ -59,14 +59,14 @@
                                 </tr>
                             </table>
 
-                            <a class="btn btn-default btn-xs" href="#!/addEstruc/{{ model.datos.idUsuario}}">
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </a>
-
-                            <a class="btn btn-default btn-xs" href="#!/delEstruc/{{ model.datos.idUsuario}}">
-                                <i class="glyphicon glyphicon-minus"></i>
-                            </a>
                         </div>
+                        <a class="btn btn-default btn-xs" href="#!/addEstruc/{{ model.datos.idUsuario}}">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </a>
+
+                        <a class="btn btn-default btn-xs" href="#!/delEstruc/{{ model.datos.idUsuario}}">
+                            <i class="glyphicon glyphicon-minus"></i>
+                        </a>
 
                         <a href="#!/user" class="btn btn-default btn-block">Volver</a>
                     </div>

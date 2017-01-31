@@ -24,5 +24,19 @@
     <orderEntry type="library" name="ng-map" level="application" />
     <orderEntry type="library" name="Chart" level="application" />
     <orderEntry type="library" name="angular-chart" level="application" />
+    <orderEntry type="library" name="angular-cookies" level="application" />
+    <orderEntry type="library" name="ng-map" level="application" />
+    <orderEntry type="library" name="Chart" level="application" />
+    <orderEntry type="library" name="angular-chart" level="application" />
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://C:/Program Files/Java/jdk1.8.0_111/jre/bin" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://C:/Program Files/Java/jdk1.8.0_111/jre/bin" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
