@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Chart, angular, angular-chart, angular-cookies, angular-route, ng-map}" />
+    <file url="PROJECT" libraries="{Chart, angular, angular-chart, angular-cookies, angular-route, angular-simple-logger, lodash, ng-map}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
     <includedPredefinedLibrary name="WebGL" />
   </component>

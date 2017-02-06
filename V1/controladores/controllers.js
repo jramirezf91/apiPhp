@@ -1,7 +1,7 @@
 /**
  * Created by Juanito-PC on 10/12/2016.
  */
-var empleadoControllers = angular.module('empleadoControllers', ['ngMap', 'chart.js']);
+var empleadoControllers = angular.module('empleadoControllers', ['uiGmapgoogle-maps', 'chart.js']);
 
 empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
@@ -101,7 +101,6 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
             zoom: 8
         };*/
 
-         $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     }
 
     $scope.logout = function()
@@ -483,30 +482,87 @@ empleadoControllers.controller('delestrucCtrl', ['$scope', '$http', 'auth', '$ro
 
 }]);
 
-empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth){
 
     var id = angular.toJson($routeParams);
     console.log(id);
     datosEstructura(id);
 
     function datosEstructura($idEstructura){
+
+        var prueba;
+
         $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstruc', $idEstructura).then(function (r) {
             console.log(r.data);
+            prueba = r.data;
             $scope.model = r.data;
+
+
+            $scope.map = {center: {latitude: prueba.datos.Latitud, longitude: prueba.datos.Longitud }, zoom: 14 };
+            $scope.options = {scrollwheel: false};
+            $scope.markers= {
+                idKey: 1,
+                coords: {
+                    latitude: prueba.datos.Latitud,
+                    longitude: prueba.datos.Longitud
+                },
+                options: { draggable: true }
+            };
+
+
+            var n = prueba.datos.Vibraciones;
+
+            console.log($scope.map);
+
+
+            var ejex = [];
+            var ejey = [];
+            var ejez = [];
+            var labels = [];
+
+            for(var i = 0; i < n.length; i++){
+
+                ejex[i] = n[i].X;
+                ejey[i] = n[i].Y;
+                ejez[i] = n[i].Z;
+                labels[i] = "" + n[i].Fecha + " " + n[i].Hora;
+
+            }
+
+            var datas = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fill: false,
+                        lineTension: 0.1,
+                        backgroundColor: "rgba(75,192,192,0.4)",
+                        borderColor: "#4BC0C0",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "rgba(75,192,192,1)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 1,
+                        pointHitRadius: 10,
+                        data: ejex,
+                        spanGaps: false
+                    }
+                ]
+            };
+                var ctx = "myChart";
+            var myLineChart = new Chart(ctx, {
+                type: 'line',
+                data: datas
+            });
         });
 
-        /*$scope.map = {
-            center: { latitude: $scope.model.datos.Latitud, longitude: $scope.model.datos.Longitud },
-            zoom: 8
-        };
-        var n = $scope.model.datos.Vibraciones;
-        for(var i = 0; i < n.length; i++){
-
-
-
-        }
-
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];*/
     }
 
     $scope.logout = function()

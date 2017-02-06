@@ -310,7 +310,7 @@ class estructuras
         $respuesta = array();
         $body = file_get_contents('php://input');
         $estructura = json_decode($body);
-        $idUser = $estructura->idUsuario;
+        $idUser = $estructura->idUser;
 
         try{
             $comando = "SELECT ". self::ID_ESTRUCTURA . "," . self::NOMBRE . " FROM " . self::NOMBRE_TABLA .

@@ -25,9 +25,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Listado de empleados
-                        </div>
+
                         <h2 class="page-header">
                             {{ model.datos.Nombre }}
                         </h2>
@@ -43,21 +41,23 @@
                             <dd>{{ model.datos.Longitud }}</dd>
 
                         </dl>
-                        <!-- apikey AIzaSyAAM2P5pP266EXVe2MC87nhu2j9F8PY5eU-->
 
-                        <ng-map zoom="11" center="[{{ model.datos.Latitud }}, {{ model.datos.Longitud }}]">
-                            <marker position="[{{ model.datos.Latitud }}, {{ model.datos.Longitud }}]" title = "{{ model.datos.Nombre }}"  />
-                            <control name="overviewMap" opened="true" />
-                        </ng-map>
+                        <div id="map_canvas">
+                            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                                <ui-gmap-marker coords="markers.coords" options="markers.options" idkey="markers.idKey">
+                                </ui-gmap-marker>
+                            </ui-gmap-google-map>
+                        </div>
 
-                        <canvas id="line" class="chart chart-line" chart-data="data"
-                                chart-labels="labels" chart-series="series" chart-options="options"
-                                chart-dataset-override="datasetOverride" chart-click="onClick">
-                        </canvas>
-
-
-                        <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
                     </div>
+
+
+
+                    <canvas id="myChart" width="846" height="423"></canvas>
+
+
+
+                    <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
                 </div>
             </div>
         </div>
