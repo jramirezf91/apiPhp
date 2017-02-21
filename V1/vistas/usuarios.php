@@ -28,6 +28,7 @@ class usuarios
     const CONTRASENA = "Password";
     const DIRECCION = "Domicilio";
     const PERMISO = "Permiso";
+    const FOTO = "Foto";
 
     public static function post($peticion){
         if($peticion[0] == 'registro') {
@@ -203,6 +204,7 @@ class usuarios
                 $respuesta["Apellido"] = $usuarioBD["Apellido"];
                 $respuesta["Direccion"] = $usuarioBD["Domicilio"];
                 $respuesta["Permiso"] = $usuarioBD["Permiso"];
+                $respuesta["Foto"] = $usuarioBD["Foto"];
                 return ["estado" => 1, "usuario" =>$respuesta];
 
             }else{
@@ -257,7 +259,8 @@ class usuarios
             self::NOMBRE . "," .
             self::APELLIDO . "," .
             self::DIRECCION . "," .
-            self::PERMISO .
+            self::PERMISO . "," .
+            self::FOTO .
             " FROM " . self::NOMBRE_TABLA .
             " WHERE " . self::DNI . "=?";
 
@@ -321,6 +324,7 @@ class usuarios
                 $respuesta["Apellido"] = $usuarioBD["Apellido"];
                 $respuesta["Direccion"] = $usuarioBD["Domicilio"];
                 $respuesta["Permiso"] = $usuarioBD["Permiso"];
+                $respuesta["Foto"] = $usuarioBD["Foto"];
                 return
                     [
                         "estado" => self::ESTADO_EXITO,

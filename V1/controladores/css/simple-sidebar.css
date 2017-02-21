@@ -110,7 +110,7 @@ body {
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        padding-left: 0px;
     }
 
     #wrapper.toggled {
@@ -126,7 +126,8 @@ body {
     }
 
     #page-content-wrapper {
-        padding: 20px;
+        padding-left: 270px;
+        padding-top: 20px;
         position: relative;
     }
 
@@ -138,4 +139,63 @@ body {
 
 .angular-google-map-container {
     height: 400px;
+}
+
+/*
+toldbar
+ */
+
+#imagen_porta{
+    background: url(portadapeque.png) no-repeat;
+    width: 124px;
+    height: 71px;
+}
+
+
+
+.navbar-top-links {
+    margin-right: 0;
+}
+.navbar-top-links li {
+    display: inline-block;
+    padding-top: 25px ;
+}
+.navbar-top-links li:last-child {
+    margin-right: 15px;
+}
+.navbar-top-links li a {
+    padding: 15px;
+    min-height: 50px;
+}
+.navbar-top-links .dropdown-menu li {
+    display: block;
+}
+.navbar-top-links .dropdown-menu li:last-child {
+    margin-right: 0;
+}
+.navbar-top-links .dropdown-menu li a {
+    padding: 3px 20px;
+    min-height: 0;
+}
+.navbar-top-links .dropdown-menu li a div {
+    white-space: normal;
+}
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+    width: 310px;
+    min-width: 0;
+}
+.navbar-top-links .dropdown-messages {
+    margin-left: 5px;
+}
+.navbar-top-links .dropdown-tasks {
+    margin-left: -59px;
+}
+.navbar-top-links .dropdown-alerts {
+    margin-left: -123px;
+}
+.navbar-top-links .dropdown-user {
+    right: 0;
+    left: auto;
 }

@@ -353,10 +353,20 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                 $http.post('http://localhost/apiPhp/V1//usuarios/login', credenciales).then(function(r) {
                     console.log("rootscope" + r.data.estado);
                     if(r.data.estado == 1) {
+
+                        var per;
+                        if(r.data.usuario.Permiso == 1){
+                            per = "Administrador";
+                        }else{
+                            per = "Trabajador";
+                        }
+                        console.log(per);
                         $rootScope.globals = {
                             usuario: {
                                 id: r.data.usuario.idUsuario,
-                                permiso: r.data.usuario.Permiso
+                                permiso: r.data.usuario.Permiso,
+                                perm: per,
+                                foto: r.data.usuario.Foto
                             }
                         };
                         console.log("salir rootscope");

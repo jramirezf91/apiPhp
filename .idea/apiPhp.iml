@@ -26,5 +26,13 @@
     <orderEntry type="library" name="angular-chart" level="application" />
     <orderEntry type="library" name="lodash" level="application" />
     <orderEntry type="library" name="angular-simple-logger" level="application" />
+    <orderEntry type="library" name="angular" level="application" />
+    <orderEntry type="library" name="angular-route" level="application" />
+    <orderEntry type="library" name="angular-cookies" level="application" />
+    <orderEntry type="library" name="lodash" level="application" />
+    <orderEntry type="library" name="angular-simple-logger" level="application" />
+    <orderEntry type="library" name="angular-google-maps" level="application" />
+    <orderEntry type="library" name="Chart" level="application" />
+    <orderEntry type="library" name="angular-chart" level="application" />
   </component>
 </module>
