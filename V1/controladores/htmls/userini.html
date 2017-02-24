@@ -48,11 +48,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="panel panel-default">
+                    <div id="panel1" class="panel panel-default">
                         <div class="panel-heading">
                             Listado de estructuras
                         </div>
-                        <table class="table table-bordered">
+                       <!-- <table class="table table-bordered">
                             <tr ng-repeat="m in model.datos">
                                 <td>{{m.Nombre}}</td>
                                 <td>
@@ -62,7 +62,19 @@
 
                                 </td>
                             </tr>
+                        </table> -->
+                        <table class="table table-bordered">
+                            <tr ng-repeat="m in model.datos">
+                                <td>{{m.Nombre}}
+
+                                    <a id="ojo" class="btn btn-default btn-xs" href="#!/userestructuras/{{m.idEstructura}}">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
                         </table>
+
                     </div>
                 </div>
             </div>

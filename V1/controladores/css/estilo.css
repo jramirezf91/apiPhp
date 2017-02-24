@@ -79,7 +79,7 @@ div.wrapper{
 }
 
 #formulario_portada{
-	padding-left: 40%;
+	padding-left: 30%;
 	padding-top: 40px;
 	padding-bottom: 120px;
 }
@@ -100,4 +100,8 @@ footer{
 
 #credenciales{
 	font: 100% sans-serif;
+}
+
+form{
+	width: 60%;
 }
