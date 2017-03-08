@@ -1,5 +1,27 @@
 <!-- Sidebar -->
 <div id="wrapper">
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <div id="imagen_porta"></div>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown"> Conectado como: {{globals.usuario.perm}}.
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a href="#!/perfil/{{globals.usuario.id}}"><i class="glyphicon glyphicon-user"></i></a>
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+    </nav>
+
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">

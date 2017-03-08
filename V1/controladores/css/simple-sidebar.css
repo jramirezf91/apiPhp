@@ -139,7 +139,10 @@ body {
 }
 
 .angular-google-map-container {
-    height: 400px;
+    height: 300px;
+    width: 500px;
+    position: relative;
+    left: 30%;
 }
 
 /*
@@ -162,6 +165,11 @@ toldbar
     width: 60%;
     position: absolute;
     left:20%;
+}
+
+#listaestruc{
+    position: relative;
+    left: 30%;
 }
 
 

@@ -1,5 +1,28 @@
 <!-- Sidebar -->
 <div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <div id="imagen_porta"></div>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown"> Conectado como: {{globals.usuario.perm}}.
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a href="#!/perfil/{{globals.usuario.id}}"><i class="glyphicon glyphicon-user"></i></a>
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+    </nav>
+
+
+
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -24,46 +47,52 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="panel panel-default">
+                    <!-- <div class="panel panel-default"> -->
 
-                        <h2 class="page-header">
-                            {{ model.datos.Nombre }}
-                        </h2>
+                    <div id="listaestruc">
 
                         <dl>
-                            <dt>Nombre</dt>
-                            <dd>{{ model.datos.Nombre }}</dd>
-                            <dt>Dirreccion</dt>
-                            <dd>{{ model.datos.Direccion }}</dd>
-                            <dt>Latitud</dt>
-                            <dd>{{ model.datos.Latitud }}</dd>
-                            <dt>Longitud</dt>
-                            <dd>{{ model.datos.Longitud }}</dd>
+                            <!-- <dt>Nombre: </dt><dd>{{ model.datos.Nombre }}</dd>
+                             <dt>Dirrección: </dt><dd>{{ model.datos.Direccion }}</dd>
+                             <dt>Latitud: </dt><dd>{{ model.datos.Latitud }}</dd>
+                             <dt>Longitud: </dt><dd>{{ model.datos.Longitud }}</dd> -->
 
-                        </dl>
-
-                        <div id="map_canvas">
-                            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-                                <ui-gmap-marker coords="markers.coords" options="markers.options" idkey="markers.idKey">
-                                </ui-gmap-marker>
-                            </ui-gmap-google-map>
-                        </div>
-
-                    </div>
+                             <p><strong>Nombre: </strong>{{ model.datos.Nombre }}</p>
+                             <p><strong>Dirección: </strong>{{ model.datos.Direccion }}</p>
+                             <p><strong>Latitud: </strong>{{ model.datos.Latitud }}</p>
+                             <p><strong>Longitud: </strong>{{ model.datos.Longitud }}</p>
 
 
 
-                    <canvas id="EjeX" width="846" height="423"></canvas>
+                         </dl>
+                     </div>
 
-                    <canvas id="EjeY" width="846" height="423"></canvas>
+                     <div id="map_canvas">
+                         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+                             <ui-gmap-marker coords="markers.coords" options="markers.options" idkey="markers.idKey">
+                             </ui-gmap-marker>
+                         </ui-gmap-google-map>
+                     </div>
 
-                    <canvas id="EjeZ" width="846" height="423"></canvas>
 
 
 
-                    <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                     <div>
+                         <canvas id="EjeX" width="400" height="300"></canvas>
+                     </div>
+
+                     <div>
+                     <canvas id="EjeY" width="400" height="300"></canvas>
+                     </div>
+
+                     <div>
+                     <canvas id="EjeZ" width="400" height="300"></canvas>
+                     </div>
+
+
+                     <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>

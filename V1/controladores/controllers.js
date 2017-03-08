@@ -508,7 +508,7 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
             $scope.model = r.data;
 
 
-            $scope.map = {center: {latitude: prueba.datos.Latitud, longitude: prueba.datos.Longitud }, zoom: 14 };
+            $scope.map = {center: {latitude: prueba.datos.Latitud, longitude: prueba.datos.Longitud }, zoom: 15 };
             $scope.options = {scrollwheel: false};
             $scope.markers= {
                 idKey: 1,
@@ -632,7 +632,7 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
                     }
                 ]
             };
-            var ctx = "EjeY";
+            var ctx = "EjeZ";
             var myLineChartZ = new Chart(ctx, {
                 type: 'line',
                 data: datasZ
