@@ -25,7 +25,7 @@ body {
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: fixed;
+    position: absolute;
     left: 250px;
     width: 0;
     height: 100%;
@@ -161,6 +161,7 @@ toldbar
     float: right;
 }
 
+
 #panel1{
     width: 60%;
     position: absolute;
@@ -172,6 +173,50 @@ toldbar
     left: 30%;
 }
 
+#listauser{
+    position: relative;
+    left:30%;
+    padding-top: 5%;
+}
+
+
+#cabecera{
+    float: left;
+}
+
+#datos{
+    padding-left: 3%;
+    float: left;
+}
+
+#graficaX{
+    padding-top: 2%;
+    width: 500px;
+    height: 500px;
+    float: left;
+}
+
+#graficaY{
+    padding-top: 2%;
+    float: left;
+    left: 30%;
+    width: 500px;
+    height: 500px;
+}
+
+#graficaZ{
+    padding-top: 2%;
+    float: left;
+    width: 500px;
+    height: 500px;
+}
+
+
+#buttonvol{
+    position: absolute;
+    right: 20%;
+    padding-top: 25% ;
+}
 
 
 .navbar-top-links {
@@ -220,3 +265,34 @@ toldbar
     right: 0;
     left: auto;
 }
+
+/* CSS ADMINISTRADOR*/
+
+#welcome{
+    position: absolute;
+    right: 45%;
+    padding-top: 5%;
+    font-size: 400%;
+}
+
+#listadoestruct{
+    width: 30%;
+    padding-top: 15%;
+    position: absolute;
+}
+
+#buttonvol2{
+    position: absolute;
+    padding-top: 5%;
+    right: 50%;
+}
+
+#vol{
+    margin-left: 60%;
+}
+
+form{
+    margin-left: 30%;
+    width: 30%;
+}
+

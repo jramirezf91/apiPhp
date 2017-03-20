@@ -49,28 +49,32 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Listado de estructuras
-                            </div>
-                            <table class="table table-bordered">
-                                <tr ng-repeat="m in model.datos">
-                                    <td>{{m.idEstructura}}</td>
-                                    <td>{{m.Nombre}}</td>
-                                    <td>{{m.Direccion}}</td>
-                                    <td>
-                                        <a class="btn btn-default btn-xs" href="#!/estructuras/{{m.idEstructura}}">
-                                            <i class="glyphicon glyphicon-eye-open"></i>
-                                        </a>
+                    <div id="panel1">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Listado de estructuras
+                                </div>
+                                <table class="table table-bordered">
+                                    <tr ng-repeat="m in model.datos">
+                                        <td>{{m.Nombre}}
+                                        <div id="ojo">
+                                            <a class="btn btn-default btn-xs" href="#!/estructuras/{{m.idEstructura}}">
+                                                <i class="glyphicon glyphicon-eye-open"></i>
+                                            </a>
 
-                                        <button class="btn btn-danger btn-xs" ng-click="retirar(m.idEstructura)">
-                                            <i class="glyphicon glyphicon-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                            <a href="#!/registrarEs" class="btn btn-default btn-block">Registrar</a>
-                            <a href="#!/" class="btn btn-default btn-block">Volver</a>
+                                            <button class="btn btn-danger btn-xs" ng-click="retirar(m.idEstructura)">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </button>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                        </div>
+                        <div>
+                            <a href="#!/registrarEs" class="btn btn-default ">Registrar</a>
+                            <a href="#!/" id="vol" class="btn btn-default ">Volver</a>
+                        </div>
                     </div>
                 </div>
             </div>

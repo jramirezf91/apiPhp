@@ -48,6 +48,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- <div class="panel panel-default"> -->
+                    <h1><span style="text-decoration: underline;"><strong>{{ model.datos.Nombre }}</strong></span></h1>
 
                     <div id="listaestruc">
 
@@ -65,7 +66,7 @@
 
 
                          </dl>
-                     </div>
+                    </div>
 
                      <div id="map_canvas">
                          <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
@@ -77,21 +78,22 @@
 
 
 
-                     <div>
+                     <div id="graficaX">
                          <canvas id="EjeX" width="400" height="300"></canvas>
                      </div>
 
-                     <div>
+                     <div id="graficaY">
                      <canvas id="EjeY" width="400" height="300"></canvas>
                      </div>
 
-                     <div>
+                     <div id="graficaZ">
                      <canvas id="EjeZ" width="400" height="300"></canvas>
                      </div>
 
-
-                     <a href="#!/userini" class="btn btn-default btn-block">Volver</a>
-                 </div>
+                    <div id="buttonvol">
+                     <a href="#!/userini" class="btn btn-default">Volver</a>
+                    </div>
+                </div>
              </div>
          </div>
      </div>

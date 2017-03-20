@@ -49,27 +49,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Listado de empleados
-                        </div>
-                        <h2 class="page-header">
-                            {{ model.datos.Nombre }}
-                        </h2>
+                    <h1><span style="text-decoration: underline;"><strong>{{ model.datos.Nombre }}</strong></span></h1>
 
+                    <div id="listaestruc">
                         <dl>
-                            <dt>Nombre</dt>
-                            <dd>{{ model.datos.Nombre }}</dd>
-                            <dt>Dirreccion</dt>
-                            <dd>{{ model.datos.Direccion }}</dd>
-                            <dt>Latitud</dt>
-                            <dd>{{ model.datos.Latitud }}</dd>
-                            <dt>Longitud</dt>
-                            <dd>{{ model.datos.Longitud }}</dd>
+                            <p><strong>Nombre: </strong>{{ model.datos.Nombre }}</p>
+                            <p><strong>Dirección: </strong>{{ model.datos.Direccion }}</p>
+                            <p><strong>Latitud: </strong>{{ model.datos.Latitud }}</p>
+                            <p><strong>Longitud: </strong>{{ model.datos.Longitud }}</p>
 
                         </dl>
-
-                        <a href="#!/estructuras" class="btn btn-default btn-block">Volver</a>
+                        <a href="#!/estructuras" class="btn btn-default ">Volver</a>
                     </div>
                 </div>
             </div>

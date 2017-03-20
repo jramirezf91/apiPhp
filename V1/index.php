@@ -91,7 +91,7 @@ switch ($metodo){
         $vista->estado = 405;
         $cuerpo = [
             "estado" => ESTADO_METODO_NO_PERMITIDO,
-            "mensaje" => utf8_encode("Método no permitido")
+            "mensaje" => utf8_encode("Metodo no permitido " . $metodo)
         ];
         $vista->imprimir($cuerpo);
 

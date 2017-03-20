@@ -14,9 +14,12 @@ empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$h
          $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $idUsuario).then(function (r) {
             console.log(r.data);
             $scope.model = r.data;
+             estructuser($idUsuario);
         });
+    }
 
-        $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', $idUsuario).then(function (r) {
+    function estructuser($idUsuario) {
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasUser', $idUsuario).then(function (r) {
             console.log(r.data);
             $scope.estruc = r.data;
         });
@@ -290,7 +293,7 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
 
 }]);
 
-empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
@@ -442,9 +445,14 @@ empleadoControllers.controller('addestrucCtrl', ['$scope', '$http', 'auth', '$ro
                 estructura: idEstruc
             };
 
+        console.log(v);
+
         if(confirm('Esta seguro añadir esta estructura?')){
             $http.post('http://localhost/apiPhp/V1/estructuras/anadirEstrUser', v ).then(function (r) {
-                listadoEstructurassinusuario();
+                console.log("antes if");
+                if(r.data.estado == 1){
+                    listadoEstructurassinusuario();
+                }
             });
         }
     };
@@ -478,7 +486,7 @@ empleadoControllers.controller('delestrucCtrl', ['$scope', '$http', 'auth', '$ro
 
         if(confirm('Esta seguro eliminar esta estructura?')){
             $http.post('http://localhost/apiPhp/V1/estructuras/eliminarEstrUser', v ).then(function (r) {
-                listadoEstructurasUsuario(iduser);
+                listadoEstructurasUsuario(id);
             });
         }
     };

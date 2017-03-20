@@ -50,26 +50,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="panel panel-default">
+                    <div id="panel1">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Listado de estructuras sin asignar
-                                <td>{{idu.idUsuario}}</td>
                             </div>
                             <table class="table table-bordered">
-                                <tr ng-repeat="m in estruc.datos">
-                                    <td>{{m.Nombre}}</td>
-                                    <td>{{m.Direccion}}</td>
-                                    <td>
-                                        <button class="btn btn-default btn-xs" ng-click="anadir(m.idEstructura, idu.idUsuario)">
+                                <tr ng-repeat="m in estruc.datos track by $index">
+                                    <td>{{m.Nombre}}
+                                        <button id="ojo" class="btn btn-default btn-xs" ng-click="anadir(m.idEstructura, idu)">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </button>
                                     </td>
                                 </tr>
                             </table>
-
-                            <a href="#!/user/{{idu}}" class="btn btn-default btn-block">Volver</a>
                         </div>
+                        <a href="#!/user/{{idu}}" class="btn btn-default ">Volver</a>
                     </div>
                 </div>
             </div>

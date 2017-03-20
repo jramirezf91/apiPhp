@@ -310,7 +310,7 @@ class estructuras
         $respuesta = array();
         $body = file_get_contents('php://input');
         $estructura = json_decode($body);
-        $idUser = $estructura->idUser;
+        $idUser = $estructura->idUsuario;
 
         try{
             $comando = "SELECT ". self::ID_ESTRUCTURA . "," . self::NOMBRE . " FROM " . self::NOMBRE_TABLA .
@@ -338,7 +338,9 @@ class estructuras
                     return
                     [
                         "estado" => self::ESTADO_NO_ENCONTRADO,
-                        "datos" => "El usuario no tiene estructuras asociadas"
+                        "mensaje" => "El usuario no tiene estructuras asociadas",
+                        "datos" => null
+
                     ];
                 }
             }else{
@@ -392,7 +394,8 @@ class estructuras
                     return
                         [
                             "estado" => self::ESTADO_NO_ENCONTRADO,
-                            "datos" => "No hay estructuras sin asignar"
+                            "mensaje" => "No hay estructuras sin asignar",
+                            "datos" => null
                         ];
                 }
             }else{
@@ -409,6 +412,8 @@ class estructuras
         $cuerpo = file_get_contents('php://input');
         $estructura = json_decode($cuerpo);
 
+
+
         $user = $estructura->idUsuario;
         $estruc = $estructura->estructura;
 
@@ -422,7 +427,7 @@ class estructuras
             $sentencia->bindParam(1, $user);
             $sentencia->bindParam(2,$estruc);
 
-            echo $sentencia->queryString;
+            //echo $sentencia->queryString;
 
             $sentencia->execute();
             if($sentencia->rowCount() > 0){
@@ -447,7 +452,7 @@ class estructuras
         $cuerpo = file_get_contents('php://input');
         $estructura = json_decode($cuerpo);
 
-        $user = $estructura->idUsuario;
+        //$user = $estructura->idUsuario;
         $estruc = $estructura->estructura;
 
         try{
