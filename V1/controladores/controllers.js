@@ -113,7 +113,7 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
 
 }]);
 
-empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', 'auth','$location', function ($scope, $routeParams, $http, auth, $location) {
 
     $scope.registrar = function() {
 
@@ -137,20 +137,24 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
                         permiso: permi
                 };
 
+                console.log(user);
+
                 $http.post('http://localhost/apiPhp/V1/usuarios/registro', user).then(function (r) {
                     if(r.data.estado == 1){
                         alert(r.data.mensaje);
-                        $scope.DNI = "";
+                        /*$scope.DNI = "";
                         $scope.Nombre = "";
                         $scope.Apellido = "";
                         $scope.Pass = "";
                         $scope.Direccion = "";
-                        $scope.PassR = "";
-                        $location.url("/user");
+                        $scope.PassR = "";*/
+
                     }else if(r.data.estado == 6){
                         alert(r.data.mensaje);
                     }
                 });
+
+                $location.url("/user");
 
             }else{
                 alert("Las contraseñas no coinciden.");
@@ -183,7 +187,7 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 
 }]);
 
-empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
@@ -231,7 +235,7 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
                 }
             })
         }
-    }
+    };
 
     $scope.logout = function()
     {
@@ -240,9 +244,11 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
 
 }]);
 
-empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routeParams', '$http', 'auth', '$location', 'upload', function ($scope, $routeParams, $http, auth, $location, upload) {
 
     $scope.registrarEs = function() {
+
+        console.log($scope.file);
 
         if(!existEstructura($scope.Nombre)){
 
@@ -250,21 +256,34 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
                 Nombre: $scope.Nombre,
                 Direccion: $scope.Direccion,
                 Latitud: $scope.Latitud,
-                Longitud: $scope.Longitud
+                Longitud: $scope.Longitud,
+                Foto: null
             };
 
-            $http.post('http://localhost/apiPhp/V1/estructuras/registro', user).then(function (r) {
+
+           /*if($scope.file != null){
+               upload.uploadFile($scope.file).then(function(res)
+               {
+                   console.log(res);
+                   //user.Foto = res;
+               })
+
+           }*/
+
+        console.log(user);
+
+           $http.post('http://localhost/apiPhp/V1/estructuras/registro', user).then(function (r) {
                 if(r.data.estado == 1){
                     alert(r.data.mensaje);
                     $scope.Nombre = "";
                     $scope.Direccion = "";
                     $scope.Latitud = "";
                     $scope.Longitud = "";
-                    $location.url("/estructuras");
                 }else{
                     alert(r.data.mensaje);
                 }
-            });
+           });
+           $location.url("/estructuras");
         }else{
             alert("La estructura que desea registrar ya existe en la base de datos.");
         }
@@ -273,7 +292,7 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
     function existEstructura($nom){
 
         var data = {
-            Nombre: $nom
+            NomEstructura: $nom
         };
 
         $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstrNom', data).then(function (r) {
@@ -293,7 +312,7 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
 
 }]);
 
-empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
+empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParams', '$http', 'auth', 'location', function ($scope, $routeParams, $http, auth, $location) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
@@ -330,7 +349,7 @@ empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParam
                 }
             })
         }
-    }
+    };
 
     $scope.logout = function()
     {

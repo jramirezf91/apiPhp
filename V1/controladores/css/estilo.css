@@ -79,7 +79,7 @@ div.wrapper{
 }
 
 #formulario_portada{
-	padding-left: 30%;
+	/*padding-left: 30%;*/
 	padding-top: 40px;
 	padding-bottom: 120px;
 }
@@ -103,5 +103,5 @@ footer{
 }
 
 form{
-	width: 60%;
+	width: 40%;
 }

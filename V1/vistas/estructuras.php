@@ -28,6 +28,7 @@ class estructuras
     const FECHA = "Fecha";
     const HORA = "Hora";
     const ESTRUCTURA = "Estructura";
+    const FOTO = "Foto";
 
     public static function post($peticion)
     {
@@ -132,6 +133,7 @@ class estructuras
         $direccion = $datosUsuario->Direccion;
         $latitud = $datosUsuario->Latitud;
         $longitud = $datosUsuario->Longitud;
+        $foto = $datosUsuario->Foto;
 
         try{
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
@@ -142,8 +144,9 @@ class estructuras
                 self::NOMBRE . "," .
                 self::DIRECCION . "," .
                 self::LATITUD . "," .
-                self::LONGITUD . ")" .
-                " VALUES(?,?,?,?)";
+                self::LONGITUD . "," .
+                self::FOTO . ")" .
+                " VALUES(?,?,?,?,?)";
 
             $sentencia = $pdo->prepare($comando);
 
@@ -151,6 +154,7 @@ class estructuras
             $sentencia->bindParam(2, $direccion);
             $sentencia->bindParam(3, $latitud);
             $sentencia->bindParam(4, $longitud);
+            $sentencia->bindParam(5, $foto);
 
             $resultado = $sentencia->execute();
 

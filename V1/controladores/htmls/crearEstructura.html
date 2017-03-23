@@ -51,30 +51,33 @@
                 <div class="col-xs-12">
                     <form name="formulario" ng-submit="registrarEs()">
                         <div class="form-group">
-                            Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^[a-zA-Z]*$/">
+                            Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true" ng-maxlength="40" ng-minlength="3">
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
                             <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
-                            <span ng-show="formulario.Nombre.$error.pattern">No es un nombre valido.</span>
                         </div>
                         <div class="form-group">
                             Direccion: <input type="text" class="form-control" placeholder="Direccion" ng-model="Direccion" ng-required="false" ng-maxlength="100">
                             <span ng-show="formulario.Apellido.$error.maxlength">Debe contener 100 caracteres como maximo..</span>
                         </div>
                         <div class="form-group">
-                            Nombre: <input type="text" class="form-control" placeholder="Latitud" ng-model="Latitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/">
+                            Latitud: <input type="text" class="form-control" placeholder="Latitud" ng-model="Latitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/">
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
                             <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                             <span ng-show="formulario.Nombre.$error.pattern">No es un nombre valido.</span>
                         </div>
                         <div class="form-group">
-                            Nombre: <input type="text" class="form-control" placeholder="Longitud" ng-model="Longitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/">
+                            Longitud: <input type="text" class="form-control" placeholder="Longitud" ng-model="Longitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/">
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
                             <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                             <span ng-show="formulario.Nombre.$error.pattern">No es un nombre valido.</span>
                         </div>
+                        <div class="form-group">
+                            <input type="file" name="file" uploader-model="file" />
+                        </div>
+
 
 
                         <button type="submit" class="btn btn-default ">Agregar</button>

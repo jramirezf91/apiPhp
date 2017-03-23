@@ -121,9 +121,10 @@ class usuarios
     public static function crear($datosUsuario){
 
         //$id = $datosUsuario->idUsuario;
+        $dni = $datosUsuario->DNI;
         $nombre = $datosUsuario->nombre;
         $apellido = $datosUsuario->apellido;
-        $dni = $datosUsuario->DNI;
+
         $contrasena = $datosUsuario->contrasena;
         $contrasenaEncriptada = self::encriptarContrasena($contrasena);
         $direccion = $datosUsuario->direccion;
