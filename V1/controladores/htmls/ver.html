@@ -75,10 +75,13 @@
 
                                 <p ng-if="model.datos.Permiso == 1">Administrador</p>
                                 <p ng-if="model.datos.Permiso == 0">Trabajador</p>
+
+
                             </div>
+
                         </dl>
                         <div id="listadoestruct">
-                            <div ng-if="model.datos.Permiso==0"  >
+                            <div ng-if="model.datos.Permiso == 0"  >
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Listado de estructuras
@@ -101,7 +104,7 @@
                             </div>
                             <div id="buttonvol2">
                                 <a  href="#!/user" class="btn btn-default">Volver</a>
-                                <a href="#!/modificar/{{model.datos.idUsuario}}" class="btn btn-default ">Modificar</a>
+                                <a href="#!/modiUser/{{model.datos.idUsuario}}" class="btn btn-default">Modificar</a>
                             </div>
                         </div>
                         <!--<div id="buttonvol2">

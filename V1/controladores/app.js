@@ -32,17 +32,9 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/crearUser.html',
               controller: 'registrarUserCtrl'
       })
-          .when('/modificar/:idUsuario',{
-              templateURl: 'htmls/modificarUser.html',
-              controller: 'modificarUserCtrl'
-      })
           .when('/registrarEs', {
               templateUrl: 'htmls/crearEstructura.html',
               controller: 'registrarEstructuraCtrl'
-      })
-          .when('/modificarEs/:idEstructura', {
-              templateUrl: 'htmls/modificarEstructura.html',
-              controller: 'modificarEstructuraCtrl'
       })
           .when('/login', {
             templateUrl: 'login.html',
@@ -68,6 +60,14 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/perfil.html',
               controller: 'datosUsuarioCtrl'
       })
+          .when('/modiUser/:idUsuario',{
+              templateUrl: 'htmls/modificarUser.html',
+              controller: 'modificarUserCtrl'
+          })
+          .when('/modiEstruc/:idEstructura',{
+              templateUrl: 'htmls/modificarEstructura.html',
+              controller: 'modificarEstructuraCtrl'
+          })
           .otherwise({
           redirectTo: '/login'
       });

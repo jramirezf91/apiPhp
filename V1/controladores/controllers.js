@@ -188,13 +188,13 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
 }]);
 
 empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
-
+    console.log($routeParams);
     var id = angular.toJson($routeParams);
     console.log(id);
-    datosUsuario(id);
+    modUsuario(id);
     var user;
 
-    function datosUsuario($idUsuario){
+    function modUsuario($idUsuario){
         $http.post('http://localhost/apiPhp/V1/usuarios/obtenerUsuariosId', $idUsuario).then(function (r) {
             console.log(r.data);
             user = r.data.datos;
@@ -202,9 +202,9 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
             $scope.Nombre = r.data.datos.Nombre;
             $scope.Apellido = r.data.datos.Apellido;
             $scope.Direccion = r.data.datos.Direccion;
-             $scope.Permiso = r.data.datos.Permiso;
+            $scope.Permiso = r.data.datos.Permiso;
         })
-    }
+    };
     
     $scope.modificar = function () {
 
@@ -312,14 +312,14 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
 
 }]);
 
-empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParams', '$http', 'auth', 'location', function ($scope, $routeParams, $http, auth, $location) {
+empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
 
     var id = angular.toJson($routeParams);
     console.log(id);
-    datosUsuario(id);
+    modEstruc(id);
     var estruct;
 
-    function datosUsuario($idEstructura){
+    function modEstruc($idEstructura){
         $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
             console.log(r.data);
             estruct = r.data.datos;
@@ -401,8 +401,9 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                             $location.path('/userini');
                         }
                     } else {
-                        $scope.error = r.data.message;
+                        $scope.error = r.data.mensaje;
                         $scope.dataLoading = false;
+                        alert(r.data.mensaje);
                     }
                 });
             };

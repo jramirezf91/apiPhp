@@ -214,7 +214,7 @@ class usuarios
             }
         }else {
             throw new ExcepcionApi(self::ESTADO_PARAMETROS_INCORRECTOS,
-                utf8_encode("Correo o contraseña invalidos"));
+                utf8_encode("Correo o contrasena invalidos"));
         }
 
     }
