@@ -36,7 +36,7 @@
                 <a href="#!/estructuras">Estructuras</a>
             </li>
             <li>
-                <a href="#!/user">Trabajadores</a>
+                <a href="#!/user">Usuarios</a>
             </li>
             <li>
                 <a ng-click="logout()">Salir</a>
@@ -75,42 +75,8 @@
 
                                 <p ng-if="model.datos.Permiso == 1">Administrador</p>
                                 <p ng-if="model.datos.Permiso == 0">Trabajador</p>
-
-
                             </div>
-
                         </dl>
-                        <div id="listadoestruct">
-                            <div ng-if="model.datos.Permiso == 0"  >
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Listado de estructuras
-                                    </div>
-                                    <table class="table table-bordered">
-                                        <tr ng-repeat="m in estruc.datos">
-                                            <td>{{m.Nombre}}</td>
-                                        </tr>
-                                    </table>
-
-                                </div>
-                                <a class="btn btn-default btn-xs" href="#!/addEstruc/{{ model.datos.idUsuario}}">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                </a>
-
-                                <a class="btn btn-default btn-xs" href="#!/delEstruc/{{ model.datos.idUsuario}}">
-                                    <i class="glyphicon glyphicon-minus"></i>
-                                </a><br>
-
-                            </div>
-                            <div id="buttonvol2">
-                                <a  href="#!/user" class="btn btn-default">Volver</a>
-                                <a href="#!/modiUser/{{model.datos.idUsuario}}" class="btn btn-default">Modificar</a>
-                            </div>
-                        </div>
-                        <!--<div id="buttonvol2">
-                            <a ng-if="model.datos.Permiso==0" href="#!/user" class="btn btn-default">Volver</a>
-                        </div> -->
-
                     </div>
                 </div>
             </div>

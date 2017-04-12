@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li>
-                <a href="#!/user/{{globals.usuario.id}}">Perfil</a>
+                <a href="#!/perfilAdmin/{{globals.usuario.id}}">Perfil</a>
             </li>
             <li>
                 <a href="#!/estructuras">Estructuras</a>
@@ -47,7 +47,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <form name="formulario" ng-submit="modificar()">
+                    <form name="formulario" ng-submit="modificar(idUsuario)">
                         <div class="form-group">
                             DNI: <input type="text" class="form-control" placeholder="DNI" ng-model="DNI" ng-required="true" ng-maxlength="9" ng-minlength="9" ng-pattern="/^([\d]{8}[\s]*[\w]{1})/">
                             <span ng-show="formulario.DNI.$error.required && formulario.DNI.$dirty">El dni es necesario.</span>
@@ -80,11 +80,11 @@
                         </select>
                         </div>
                         <div class="form-group">
-                            Contraseña: <input type="text" class="form-control" placeholder="Contraseña" ng-model="Pass" ng-required="true">
+                            Contraseña: <input type="text" class="form-control" placeholder="Contraseña" ng-model="Pass" >
                             <span ng-show="formulario.Pass.$error.required && fomulario.Pass.$dirty">Campo necesario.</span>
                         </div>
                         <div class="form-group">
-                            Repetir Contraseña: <input type="text" class="form-control" placeholder="Repetir Contraseña" ng-model="PassR" ng-required="true">
+                            Repetir Contraseña: <input type="text" class="form-control" placeholder="Repetir Contraseña" ng-model="PassR" >
                             <span ng-show="formulario.PassR.$error.required && fomulario.PassR.$dirty">Campo necesario.</span>
                         </div>
                         <button type="submit" class="btn btn-default">Actualizar</button>

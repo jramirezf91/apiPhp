@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li>
-                <a href="#!/user/{{globals.usuario.id}}">Perfil</a>
+                <a href="#!/perfilAdmin/{{globals.usuario.id}}">Perfil</a>
             </li>
             <li>
                 <a href="#!/estructuras">Estructuras</a>
@@ -65,14 +65,14 @@
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
                             <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
-                            <span ng-show="formulario.Nombre.$error.pattern">No es un nombre valido.</span>
+                            <span ng-show="formulario.Nombre.$error.pattern">No es una latitud valido.</span>
                         </div>
                         <div class="form-group">
                             Longitud: <input type="text" class="form-control" placeholder="Longitud" ng-model="Longitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/">
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
                             <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
-                            <span ng-show="formulario.Nombre.$error.pattern">No es un nombre valido.</span>
+                            <span ng-show="formulario.Nombre.$error.pattern">No es una longitud valido.</span>
                         </div>
                         <div class="form-group">
                             <input type="file" name="file" uploader-model="file" />

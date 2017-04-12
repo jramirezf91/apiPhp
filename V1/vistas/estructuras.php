@@ -519,6 +519,11 @@ class estructuras
 
     public static function actualizar($estructura, $idEstructura){
 
+        $Nombre = $estructura->Nombre;
+        $Direccion = $estructura->Direccion;
+        $Latitud = $estructura->Latitud;
+        $Longitud = $estructura->Longitud;
+
         try{
             $consulta = "UPDATE " . self::NOMBRE_TABLA .
                 " SET " .  self::NOMBRE . "=?," .
@@ -536,10 +541,7 @@ class estructuras
             $sentencia->bindParam(5, $idEstructura);
 
 
-            $Nombre = $estructura->nombre;
-            $Direccion = $estructura->direccion;
-            $Latitud = $estructura->latitud;
-            $Longitud = $estructura->longitud;
+
 
 
             $sentencia->execute();

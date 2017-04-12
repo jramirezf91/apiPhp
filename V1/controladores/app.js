@@ -68,6 +68,14 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/modificarEstructura.html',
               controller: 'modificarEstructuraCtrl'
           })
+          .when('/fotoUser/:dni', {
+              templateUrl: 'htmls/fotoUser.html',
+              controller: 'cambiarFotoCtrl'
+          })
+          .when('/perfilAdmin/:idUsuario',{
+              templateUrl: 'htmls/perfiladmin.html',
+              controller: 'datosUsuarioCtrl'
+          })
           .otherwise({
           redirectTo: '/login'
       });
@@ -122,21 +130,23 @@ app.directive('uploaderModel', ["$parse", function ($parse) {
 
 app.service('upload', ["$http", "$q", function ($http, $q)
     {
-        this.uploadFile = function(file)
+        this.uploadFile = function(file, name)
         {
             var deferred = $q.defer();
             var formData = new FormData();
+            formData.append("name", name);
             formData.append("file", file);
             return $http.post("server.php", formData, {
                 headers: {
                     "Content-type": undefined
                 },
-                transformRequest: formData
+                transformRequest: angular.identity
             }).then(function(res){
                     deferred.resolve(res);
-                }).error(function(msg, code){
-                    deferred.reject(msg);
                 });
+                //.error(function(msg, code){
+                  //  deferred.reject(msg);
+                //});
             return deferred.promise;
         }
     }]);

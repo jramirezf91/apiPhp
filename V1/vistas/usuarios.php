@@ -37,6 +37,8 @@ class usuarios
             return self::loguear();
         }else if($peticion[0] == 'obtenerUsuariosId'){
             return self::obtenerUsuarioId();
+        }else if($peticion[0] == "buscarFoto"){
+            return self::buscarFoto();
         }
         else{
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA,
@@ -341,6 +343,40 @@ class usuarios
 
     }
 
+    public static function buscarFoto(){
+        $respuesta = array();
+        $body = file_get_contents('php://input');
+        $dni= json_decode($body);
+        $dniUser = $dni->dni;
+
+        try{
+            $comando = "SELECT Foto FROM " . self::NOMBRE_TABLA .
+                " WHERE " .self::DNI . "=?";
+
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            $sentencia->bindParam(1, $dniUser);
+
+            if($sentencia->execute()){
+
+                $usuarioBD= $sentencia->fetch(PDO::FETCH_ASSOC);
+                http_response_code(200);
+
+                $respuesta["Foto"] = $usuarioBD["Foto"];
+                return
+                    [
+                        "estado" => self::ESTADO_EXITO,
+                        "datos" => $respuesta
+                    ];
+            }else{
+                throw  new ExcepcionApi(self::ESTADO_ERROR, "Se ha producido un error");
+            }
+
+        }catch (PDOException $e){
+            throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
+        }
+
+    }
+
     public static function eliminar($idUsuario){
         try{
             $comando = "DELETE FROM " . self::NOMBRE_TABLA .
@@ -415,8 +451,8 @@ class usuarios
             $Nombre = $usuario->nombre;
             $Apellido = $usuario->apellido;
             $contrasena = $usuario->contrasena;
-
             $direccion = $usuario->direccion;
+
             if(strcmp($usuario->permiso, "Si")==0){
                 $permiso = 1;
             }else{

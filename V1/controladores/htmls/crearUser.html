@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li>
-                <a href="#!/user/{{globals.usuario.id}}">Perfil</a>
+                <a href="#!/perfilAdmin/{{globals.usuario.id}}">Perfil</a>
             </li>
             <li>
                 <a href="#!/estructuras">Estructuras</a>
@@ -88,6 +88,9 @@
                         <div class="form-group">
                             Repetir Contraseña: <input type="text" class="form-control" placeholder="Repetir Contraseña" ng-model="PassR" ng-required="true">
                                 <span ng-show="formulario.PassR.$error.required && fomulario.PassR.$dirty">Campo necesario.</span>
+                        </div>
+                        <div>
+                            ¿Desea añadir una foto? <input type="checkbox" ng-model="checkBox.value" ng-true-value="1" ng-false-value="0">
                         </div>
                         <button type="submit" class="btn btn-default ">Agregar</button>
                         <a href="#!/user" class="btn btn-default ">Volver</a>

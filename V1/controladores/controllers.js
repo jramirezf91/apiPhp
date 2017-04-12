@@ -149,12 +149,17 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
                         $scope.Direccion = "";
                         $scope.PassR = "";*/
 
+
                     }else if(r.data.estado == 6){
                         alert(r.data.mensaje);
                     }
                 });
 
-                $location.url("/user");
+                if($scope.checkBox.value){
+                    $location.url("/fotoUser/" + $scope.DNI);
+                }else{
+                    $location.url("/user");
+                }
 
             }else{
                 alert("Las contraseñas no coinciden.");
@@ -203,16 +208,19 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
             $scope.Apellido = r.data.datos.Apellido;
             $scope.Direccion = r.data.datos.Direccion;
             $scope.Permiso = r.data.datos.Permiso;
+            $scope.idUsuario = r.data.datos.idUsuario;
+            $scope.Pass = "";
+            $scope.PassR = "";
         })
-    };
+    }
     
-    $scope.modificar = function () {
+    $scope.modificar = function (id) {
 
         var permi;
         if($scope.Permiso == 1){
             permi = "Si";
         }else{
-            permi = "no";
+            permi = "No";
         }
 
         if(angular.equals($scope.Pass, $scope.PassR)) {
@@ -225,8 +233,12 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
                 direccion: $scope.Direccion,
                 permiso: permi
             };
+            var v = 'http://localhost/apiPhp/V1/usuarios/' + id;
 
-            $http.put('http://localhost/apiPhp/V1/usuarios/' + id, usuario).then(function (r) {
+            console.log(v);
+            console.log(usuario);
+
+            $http.put(v, usuario).then(function (r) {
                 if(r.data.estado == 1){
                     alert(r.data.mensaje);
                     $location.url("/user/" + id);
@@ -234,6 +246,9 @@ empleadoControllers.controller('modificarUserCtrl', ['$scope','$routeParams', '$
                     alert(r.data.estado + ": " + r.data.mensaje);
                 }
             })
+        }else{
+            alert("Las contraseñas no coinciden.");
+
         }
     };
 
@@ -320,6 +335,8 @@ empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParam
     var estruct;
 
     function modEstruc($idEstructura){
+
+
         $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasId', $idEstructura).then(function (r) {
             console.log(r.data);
             estruct = r.data.datos;
@@ -327,10 +344,16 @@ empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParam
             $scope.Latitud = r.data.datos.Latitud;
             $scope.Direccion = r.data.datos.Direccion;
             $scope.Longitud = r.data.datos.Longitud;
+            $scope.idEstructura = r.data.datos.idEstructura;
         })
     }
 
-    $scope.modificar = function () {
+    $scope.modificar = function (id) {
+
+
+        var v = 'http://localhost/apiPhp/V1/estructuras/' + id;
+        console.log(v);
+
 
         if(confirm('Esta seguro de modificar esta estructura?')){
             var usuario = {
@@ -340,7 +363,10 @@ empleadoControllers.controller('modificarEstructuraCtrl', ['$scope','$routeParam
                 Longitud: $scope.Longitud
             };
 
-            $http.put('http://localhost/apiPhp/V1/estructuras/' + id, usuario).then(function (r) {
+            console.log(usuario);
+
+
+            $http.put(v, usuario).then(function (r) {
                 if (r.data.estado == 1) {
                     alert(r.data.mensaje);
                     $location.url("/estructuras/" + id);
@@ -416,11 +442,12 @@ empleadoControllers.controller('useriniCtrl', ['$scope', '$http', 'auth', '$root
     function listadoEstructurasUser($id) {
 
         var user = {
-            idUser: $id
+            idUsuario: $id
         };
 
-        $http.post('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructurasUser', user).then(function (r) {
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasUser', user).then(function (r) {
             $scope.model = r.data;
+            console.log($scope.model);
         });
     }
 
@@ -674,5 +701,47 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
     {
         auth.logout();
     }
+
+}]);
+
+empleadoControllers.controller('cambiarFotoCtrl', ['$scope', '$routeParams', '$http', 'auth','$location', 'upload', function ($scope, $routeParams, $http, auth, $location, upload)
+{
+
+    var dni = angular.toJson($routeParams);
+    console.log(dni);
+    obtenerFoto(dni);
+
+    function obtenerFoto($dni){
+        $http.post('http://localhost/apiPhp/V1/usuarios/buscarFoto', $dni).then(function (r) {
+            console.log(r.data);
+            $scope.foto = r.data.datos.Foto;
+        });
+    }
+
+
+
+    $scope.addFoto = function() {
+        console.log($scope.file);
+
+        if($scope.file != null){
+             upload.uploadFile($scope.file, dni).then(function(res)
+             {
+                 console.log(res);
+                 //user.Foto = res;
+             })
+        }else{
+            $location.url('/user');
+        }
+
+
+    };
+
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
 
 }]);
