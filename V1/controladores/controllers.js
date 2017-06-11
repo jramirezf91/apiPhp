@@ -580,52 +580,17 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
             console.log($scope.map);
 
 
-            var ejex = [];
+
             var ejey = [];
-            var ejez = [];
+
             var labels = [];
 
             for(var i = 0; i < n.length; i++){
-
-                ejex[i] = n[i].X;
                 ejey[i] = n[i].Y;
-                ejez[i] = n[i].Z;
                 labels[i] = "" + n[i].Fecha + " " + n[i].Hora;
 
             }
 
-            var datas = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "EjeX",
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "rgba(75,192,192,0.4)",
-                        borderColor: "#4BC0C0",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "rgba(75,192,192,1)",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                        pointHoverBorderColor: "rgba(220,220,220,1)",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: ejex,
-                        spanGaps: false
-                    }
-                ]
-            };
-            var ctx = "EjeX";
-            var myLineChart = new Chart(ctx, {
-                type: 'line',
-                data: datas
-            });
 
             var datasY = {
                 labels: labels,
@@ -660,38 +625,7 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
                 data: datasY
             });
 
-            var datasZ = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "EjeX",
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "rgba(75,192,192,0.4)",
-                        borderColor: "#c0120d",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "rgba(75,192,192,1)",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                        pointHoverBorderColor: "rgba(220,220,220,1)",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: ejez,
-                        spanGaps: false
-                    }
-                ]
-            };
-            var ctx = "EjeZ";
-            var myLineChartZ = new Chart(ctx, {
-                type: 'line',
-                data: datasZ
-            });
+
 
         });
 
