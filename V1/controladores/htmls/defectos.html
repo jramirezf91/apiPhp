@@ -1,0 +1,70 @@
+<!-- Sidebar -->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <div id="imagen_porta"></div>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown"> Conectado como: {{globals.usuario.perm}}.
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a href="#!/perfil/{{globals.usuario.id}}"><i class="glyphicon glyphicon-user"></i></a>
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+    </nav>
+
+
+
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#!/userini">
+                    Principal
+                </a>
+            </li>
+            <li>
+                <a href="#!/perfil/{{globals.usuario.id}}">Perfil</a>
+            </li>
+            <li>
+                <a href="#!/userini">Estructuras</a>
+            </li>
+            <li>
+                <a ng-click="logout()">Salir</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="panel1" class="panel panel-default">
+                        <div class="panel-heading">
+                            Listado de defectos
+                        </div>
+
+                        <table class="table table-bordered">
+                            <tr ng-repeat="m in model.datos">
+                                <td>{{m.Nombre}}
+
+                                    <a id="ojo" class="btn btn-default btn-xs" href="#!/userestructuras/{{m.idEstructura}}">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
