@@ -55,7 +55,6 @@ class usuarios
         }
     }
 
-
     public static function put($peticion){
         if(!empty($peticion[0])){
             $body = file_get_contents('php://input');
@@ -186,7 +185,6 @@ class usuarios
         else return null;
     }
 
-
     public static function loguear(){
         $respuesta = array();
 
@@ -277,8 +275,6 @@ class usuarios
         }
 
     }
-
-
 
     public static function obtenerUsuarios(){
         try{
@@ -382,17 +378,51 @@ class usuarios
             $comando = "DELETE FROM " . self::NOMBRE_TABLA .
                 " WHERE " .self::ID_USUARIO . "=?";
 
-
-
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
 
             $sentencia->bindParam(1, $idUsuario);
 
             self::quitarEstructuras($idUsuario);
 
+            self::quitarDefectos($idUsuario);
+
             $sentencia->execute();
 
             return $sentencia->rowCount();
+
+        }catch (PDOException $e){
+            throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
+        }
+    }
+
+    public static function quitarDefectos($idUsuario){
+        try{
+
+            $comando2 = "SELECT idDefecto FROM defecto WHERE Usuario =?";
+
+            $sentencia2 = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando2);
+
+            $sentencia2->bindParam(1, $idUsuario);
+
+            $sentencia2->execute();
+            if ($sentencia2->rowCount() > 0) {
+                $defectos = $sentencia2->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($defectos as $idDefec) {
+                    //self::modEstru($idDefec["idDefecto"]);
+
+                    $comando3 = "DELETE FROM " . defecto . " WHERE " . idDefecto . "=?";
+
+                    $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando3);
+                    $sentencia->bindParam(1,$idDefec["idDefecto"]);
+                    $sentencia->execute();
+                    if($sentencia->rowCount() <= 0){
+                        throw new ExcepcionApi(self::ESTADO_NO_ENCONTRADO,
+                            "Ha ocurrido un error", 404);
+                    }
+                }
+
+            }
 
         }catch (PDOException $e){
             throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
@@ -422,7 +452,6 @@ class usuarios
         }
 
     }
-
 
     public static function modEstru($idEstruc){
         try{
