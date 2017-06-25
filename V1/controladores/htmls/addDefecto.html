@@ -37,6 +37,9 @@
                 <a href="#!/userini">Estructuras</a>
             </li>
             <li>
+                <a href="#!/defectos/{{globals.usuario.id}}">Defectos</a>
+            </li>
+            <li>
                 <a ng-click="logout()">Salir</a>
             </li>
         </ul>
@@ -55,29 +58,27 @@
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                         </div>
                         <div class="form-group">
-                            Tipo: <select ng-model="TipoDefecto" class="form-control">
-                                    <option value="Entre" ng-change="entre()">Entre</option>
-                                    <option value="Por Encima" ng-change="encima()">Por Encima</option>
-                                    <option value="Por Debajo" ng-change="debajo()">Por Debajo</option>
+                            Tipo: <select ng-model="TipoDefecto" ng-change="cambio()" class="form-control">
+                                    <option value=""></option>
+                                    <option value="Entre" >Entre</option>
+                                    <option value="Por Encima">Por Encima</option>
+                                    <option value="Por Debajo">Por Debajo</option>
                                   </select>
                         </div>
                         <div class="form-group">
-                            Rango Inferior: <input type="text" class="form-control" placeholder="LimitInf" ng-model="LimitInf" ng-required="false" >
+                            Rango Inferior: <input type="number" class="form-control" placeholder="LimitInf" ng-model="LimitInf" ng-required="false" >
                         </div>
                         <div class="form-group">
-                            Rango Superior: <input type="text" class="form-control" placeholder="LimitSup" ng-model="LimitSup" ng-required="true">
+                            Rango Superior: <input ng-show="angular.equals($scope.TipoDefecto, 'Entre') || angular.equals($scope.TipoDefecto, 'Por Encima')" type="number" class="form-control" placeholder="LimitSup" ng-model="LimitSup" ng-required="true">
                         </div>
                         <div class="form-group">
-                            Descripcion: <input type="text" class="form-control" placeholder="Descripcion" ng-model="Descripcion" ng-required="false" ng-maxlength=400" ng-minlength="3" >
+                            Descripcion: <input type="text" class="form-control" placeholder="Descripcion" ng-model="Descripcion" ng-required="false" ng-maxlength="400" ng-minlength="3" >
                             <span ng-show="formulario.Descripcion.$error.maxlength">Debe contener 400 caracteres como maximo.</span>
                             <span ng-show="formulario.Descripcion.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                         </div>
 
-
-
-
                         <button type="submit" class="btn btn-default ">Agregar</button>
-                        <a href="#!/estructuras" class="btn btn-default ">Volver</a>
+                        <a href="#!/defectos/{{globals.usuario.id}}" class="btn btn-default ">Volver</a>
                     </form>
                 </div>
             </div>

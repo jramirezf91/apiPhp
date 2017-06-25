@@ -754,7 +754,7 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
             NomDefecto: $nom
         };
 
-        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerDefNom', data).then(function (r) {
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefNom', data).then(function (r) {
             if(r.data.estado == 0){
                 return true;
             }else{
@@ -765,19 +765,20 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
 
 
 
-    $scope.entre = function () {
-        $scope.formulario.LimitInf.show;
-        $scope.formulario.LimitSup.show;
-    };
+    $scope.cambio = function () {
+        if(angular.equals($scope.TipoDefecto, "Entre")){
+            $scope.LimitSup.show;
+            $scope.LimitInf.show;
 
-    $scope.encima = function () {
-        $scope.formulario.LimitInf.hidden;
-    };
+        }else if(angular.equals($scope.TipoDefecto, "Por Encima")){
+            $scope.LimitSup.show = true;
+            $scope.LimitInf.show = false;
 
-    $scope.debajo = function () {
-        $scope.formulario.LimitSup.hidden;
+        }else if(angular.equals($scope.TipoDefecto, "Por Debajo")){
+            $scope.LimitSup.show = false;
+            $scope.LimitInf.show = true;
+        }
     };
-
 
 
     $scope.logout = function()

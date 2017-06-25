@@ -81,7 +81,7 @@ app.config(['$routeProvider',
               controller: 'defectosCtrl'
           })
           .when('/registrarDef', {
-              templateUrl: 'htmls/addDefecto',
+              templateUrl: 'htmls/addDefecto.html',
               controller: 'addDefectosCtrl'
           })
           .otherwise({
