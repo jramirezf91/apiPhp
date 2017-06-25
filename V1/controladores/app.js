@@ -76,9 +76,13 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/perfiladmin.html',
               controller: 'datosUsuarioCtrl'
           })
-          .when('/defectos', {
+          .when('/defectos/:idUsuario', {
               templateUrl: 'htmls/defectos.html',
               controller: 'defectosCtrl'
+          })
+          .when('/registrarDef', {
+              templateUrl: 'htmls/addDefecto',
+              controller: 'addDefectosCtrl'
           })
           .otherwise({
           redirectTo: '/login'

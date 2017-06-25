@@ -1,7 +1,6 @@
 <!-- Sidebar -->
 <div id="wrapper">
 
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -22,21 +21,20 @@
         <!-- /.navbar-top-links -->
     </nav>
 
+
+
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#!/">
+                <a href="#!/userini">
                     Principal
                 </a>
             </li>
             <li>
-                <a href="#!/perfilAdmin/{{globals.usuario.id}}">Perfil</a>
+                <a href="#!/perfil/{{globals.usuario.id}}">Perfil</a>
             </li>
             <li>
-                <a href="#!/estructuras">Estructuras</a>
-            </li>
-            <li>
-                <a href="#!/user">Usuarios</a>
+                <a href="#!/userini">Estructuras</a>
             </li>
             <li>
                 <a ng-click="logout()">Salir</a>
@@ -49,7 +47,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <form name="formulario" ng-submit="registrarEs()">
+                    <form name="formulario" ng-submit="registrarDef()">
                         <div class="form-group">
                             Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true" ng-maxlength="40" ng-minlength="3">
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
@@ -57,26 +55,24 @@
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                         </div>
                         <div class="form-group">
-                            Direccion: <input type="text" class="form-control" placeholder="Direccion" ng-model="Direccion" ng-required="false" ng-maxlength="100">
-                            <span ng-show="formulario.Apellido.$error.maxlength">Debe contener 100 caracteres como maximo..</span>
+                            Tipo: <select ng-model="TipoDefecto" class="form-control">
+                                    <option value="Entre" ng-change="entre()">Entre</option>
+                                    <option value="Por Encima" ng-change="encima()">Por Encima</option>
+                                    <option value="Por Debajo" ng-change="debajo()">Por Debajo</option>
+                                  </select>
                         </div>
                         <div class="form-group">
-                            Latitud: <input type="text" class="form-control" placeholder="Latitud" ng-model="Latitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/">
-                            <span ng-show="formulario.Latitud.$error.required && formulario.Latitud.$dirty">La latitud es necesario.</span>
-                            <span ng-show="formulario.Latitud.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
-                            <span ng-show="formulario.Latitud.$error.minlength">Debe contener 3 caracteres como minimo.</span>
-                            <span ng-show="formulario.Latitud.$error.pattern">No es una latitud valido.</span>
+                            Rango Inferior: <input type="text" class="form-control" placeholder="LimitInf" ng-model="LimitInf" ng-required="false" >
                         </div>
                         <div class="form-group">
-                            Longitud: <input type="text" class="form-control" placeholder="Longitud" ng-model="Longitud" ng-required="true" ng-maxlength="40" ng-minlength="3" ng-pattern="/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/">
-                            <span ng-show="formulario.Longitud.$error.required && formulario.Longitud.$dirty">La longitud es necesario.</span>
-                            <span ng-show="formulario.Longitud.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
-                            <span ng-show="formulario.Longitud.$error.minlength">Debe contener 3 caracteres como minimo.</span>
-                            <span ng-show="formulario.Longitud.$error.pattern">No es una longitud valido.</span>
+                            Rango Superior: <input type="text" class="form-control" placeholder="LimitSup" ng-model="LimitSup" ng-required="true">
                         </div>
                         <div class="form-group">
-                            <input type="file" name="file" uploader-model="file" />
+                            Descripcion: <input type="text" class="form-control" placeholder="Descripcion" ng-model="Descripcion" ng-required="false" ng-maxlength=400" ng-minlength="3" >
+                            <span ng-show="formulario.Descripcion.$error.maxlength">Debe contener 400 caracteres como maximo.</span>
+                            <span ng-show="formulario.Descripcion.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                         </div>
+
 
 
 

@@ -55,13 +55,22 @@
                         <table class="table table-bordered">
                             <tr ng-repeat="m in model.datos">
                                 <td>{{m.Nombre}}
-
-                                    <a id="ojo" class="btn btn-default btn-xs" href="#!/userestructuras/{{m.idEstructura}}">
-                                        <i class="glyphicon glyphicon-eye-open"></i>
-                                    </a>
+                                    <div id="ojo">
+                                        <a  class="btn btn-default btn-xs" href="#!/editarDefecto/{{m.idDefecto}}">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                        </a>
+                                        <button class="btn btn-danger btn-xs" ng-click="retirar(m.idDefecto)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
+
+                        <div>
+                            <a href="#!/registrarDef" class="btn btn-default ">Añadir</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

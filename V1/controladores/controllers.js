@@ -679,3 +679,110 @@ empleadoControllers.controller('cambiarFotoCtrl', ['$scope', '$routeParams', '$h
 
 
 }]);
+
+empleadoControllers.controller('defectosCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
+
+    listadoDefectosUser($rootScope.globals.usuario.id);
+
+    function listadoDefectosUser($id) {
+
+        var user = {
+            idUsuario: $id
+        };
+
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoUser', user).then(function (r) {
+            $scope.model = r.data;
+            console.log($scope.model);
+        });
+    }
+
+    $scope.retirar = function (id) {
+        var v = 'http://localhost/apiPhp/V1/defectos/' + id;
+
+        if(confirm('Esta seguro de eliminar este defecto?')){
+            $http.delete(v).then(function (r) {
+                listadoDefectosUser($rootScope.globals.usuario.id);
+            });
+        }
+    };
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
+
+    $scope.registrarDef = function() {
+
+        console.log($scope.file);
+
+        if(!existDefecto($scope.Nombre)){
+
+            var user = {
+                Nombre: $scope.Nombre,
+                TipoDefecto: $scope.TipoDefecto,
+                LimitInf: $scope.LimitInf,
+                LimitSup: $scope.LimitSup,
+                Descripcion: $scope.Descripcion
+            };
+
+
+            $http.post('http://localhost/apiPhp/V1/defectos/registro', user).then(function (r) {
+                if(r.data.estado == 1){
+                    alert(r.data.mensaje);
+                    $scope.Nombre = "";
+                    $scope.LimitInf = "";
+                    $scope.LimitSup = "";
+                    $scope.Descripcion = "";
+                }else{
+                    alert(r.data.mensaje);
+                }
+            });
+            $location.url("/defectos");
+        }else{
+            alert("El defecto que desea registrar ya existe en la base de datos.");
+        }
+    };
+
+    function existDefecto($nom){
+
+        var data = {
+            NomDefecto: $nom
+        };
+
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerDefNom', data).then(function (r) {
+            if(r.data.estado == 0){
+                return true;
+            }else{
+                return false;
+            }
+        })
+    }
+
+
+
+    $scope.entre = function () {
+        $scope.formulario.LimitInf.show;
+        $scope.formulario.LimitSup.show;
+    };
+
+    $scope.encima = function () {
+        $scope.formulario.LimitInf.hidden;
+    };
+
+    $scope.debajo = function () {
+        $scope.formulario.LimitSup.hidden;
+    };
+
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
