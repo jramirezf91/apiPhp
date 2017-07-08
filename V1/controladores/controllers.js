@@ -716,6 +716,8 @@ empleadoControllers.controller('defectosCtrl', ['$scope', '$http', 'auth', '$roo
 
 empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
 
+    $scope.rangs = true;
+    $scope.rangi = true;
     $scope.registrarDef = function() {
 
         console.log($scope.file);
@@ -767,16 +769,17 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
 
     $scope.cambio = function () {
         if(angular.equals($scope.TipoDefecto, "Entre")){
-            $scope.LimitSup.show;
-            $scope.LimitInf.show;
+
+            $scope.rangs = true;
+            $scope.rangi = true;
 
         }else if(angular.equals($scope.TipoDefecto, "Por Encima")){
-            $scope.LimitSup.show = true;
-            $scope.LimitInf.show = false;
+            $scope.rangs = true;
+            $scope.rangi = false;
 
         }else if(angular.equals($scope.TipoDefecto, "Por Debajo")){
-            $scope.LimitSup.show = false;
-            $scope.LimitInf.show = true;
+            $scope.rangs = false;
+            $scope.rangi = true;
         }
     };
 

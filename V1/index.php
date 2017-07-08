@@ -9,6 +9,7 @@ require 'vistas/VistaJson.php';
 require 'vistas/usuarios.php';
 require 'vistas/ExcepcionApi.php';
 require 'vistas/estructuras.php';
+require 'vistas/defectos.php';
 
 
 const ESTADO_URL_INCORRECTA = 2;
@@ -40,7 +41,7 @@ else
         utf8_encode("No se reconoce la petición"));
 
 $recurso = array_shift($peticion);
-$recursos_existentes = array('estructuras', 'usuarios');
+$recursos_existentes = array('estructuras', 'usuarios', 'defectos');
 
 
 if(!in_array($recurso, $recursos_existentes)){
