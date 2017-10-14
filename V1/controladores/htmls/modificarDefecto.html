@@ -1,0 +1,87 @@
+<!-- Sidebar -->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <div id="imagen_porta"></div>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown"> Conectado como: {{globals.usuario.perm}}.
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a href="#!/perfil/{{globals.usuario.id}}"><i class="glyphicon glyphicon-user"></i></a>
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+    </nav>
+
+
+
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#!/userini">
+                    Principal
+                </a>
+            </li>
+            <li>
+                <a href="#!/perfil/{{globals.usuario.id}}">Perfil</a>
+            </li>
+            <li>
+                <a href="#!/userini">Estructuras</a>
+            </li>
+            <li>
+                <a href="#!/defectos/{{globals.usuario.id}}">Defectos</a>
+            </li>
+            <li>
+                <a ng-click="logout()">Salir</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form name="formulario" ng-submit="modificar(idDefecto)">
+                        <div class="form-group">
+                            Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true" ng-maxlength="40" ng-minlength="3">
+                            <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
+                            <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
+                            <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
+                        </div>
+                        <div class="form-group">
+                            Tipo: <select ng-model="TipoDefecto"  ng-change="cambio()" class="form-control">
+                            <option value=""></option>
+                            <option value="Entre" >Entre</option>
+                            <option value="Por Encima">Por Encima</option>
+                            <option value="Por Debajo">Por Debajo</option>
+                        </select>
+                        </div>
+                        <div class="form-group" >
+                            Rango Inferior: <input ng-show="rangi" type="number" class="form-control" placeholder="LimitInf" ng-model="LimitInf" ng-required="false" >
+                        </div>
+                        <div class="form-group">
+                            Rango Superior: <input ng-show="rangs" ng-disabled="angular.equals($scope.TipoDefecto, 'Por Debajo')" type="number" class="form-control" placeholder="LimitSup" ng-model="LimitSup" ng-required="true">
+                        </div>
+                        <div class="form-group">
+                            Descripcion: <input type="text" class="form-control" placeholder="Descripcion" ng-model="Descripcion" ng-required="false" ng-maxlength="400" ng-minlength="3" >
+                            <span ng-show="formulario.Descripcion.$error.maxlength">Debe contener 400 caracteres como maximo.</span>
+                            <span ng-show="formulario.Descripcion.$error.minlength">Debe contener 3 caracteres como minimo.</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-default ">Actualizar</button>
+                        <a href="#!/defectos/{{globals.usuario.id}}" class="btn btn-default ">Volver</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

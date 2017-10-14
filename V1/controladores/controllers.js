@@ -790,3 +790,119 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
     }
 
 }]);
+
+empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
+
+    listadoDefectosUser($rootScope.globals.usuario.id);
+
+    function listadoDefectosUser($id) {
+
+        var user = {
+            idUsuario: $id
+        };
+
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoUser', user).then(function (r) {
+            $scope.model = r.data;
+            console.log($scope.model);
+        });
+    }
+
+
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
+
+    var id = angular.toJson($routeParams);
+    console.log(id);
+    modDefec(id);
+    var defect;
+
+    function modDefec($idDefecto){
+
+
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoId', $idDefecto).then(function (r) {
+            console.log(r.data);
+            defect = r.data.datos;
+            $scope.Nombre = r.data.datos.Nombre;
+            $scope.Tipo = r.data.datos.Tipo;
+            $scope.LimitInf = r.data.datos.LimitInf;
+            $scope.LimitSup = r.data.datos.LimitSup;
+            $scope.Descripcion= r.data.datos.Descripcion;
+            $scope.idDefecto = r.data.datos.idDefecto;
+        })
+    }
+
+    $scope.modificar = function (id) {
+
+
+        var v = 'http://localhost/apiPhp/V1/defectos/' + id;
+        console.log(v);
+
+
+        if(confirm('Esta seguro de modificar este defecto?')){
+            var defecto = {
+                Nombre: $scope.Nombre,
+                Tipo: $scope.Tipo,
+                LimitInf: $scope.LimitInf,
+                LimitSup: $scope.LimitSup,
+                Descripcion: $scope.Descripcion
+            };
+
+            console.log(defecto);
+
+
+            $http.put(v, defecto).then(function (r) {
+                if (r.data.estado == 1) {
+                    alert(r.data.mensaje);
+                    $location.url("/defectos/" + id);
+                } else {
+                    alert(r.data.estado + ": " + r.data.mensaje);
+                }
+            })
+        }
+    };
+
+    $scope.cambio = function () {
+        if(angular.equals($scope.TipoDefecto, "Entre")){
+
+            $scope.rangs = true;
+            $scope.rangi = true;
+
+        }else if(angular.equals($scope.TipoDefecto, "Por Encima")){
+            $scope.rangs = true;
+            $scope.rangi = false;
+
+        }else if(angular.equals($scope.TipoDefecto, "Por Debajo")){
+            $scope.rangs = false;
+            $scope.rangi = true;
+        }
+    };
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
+empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
+
+    var id = angular.toJson($routeParams);
+    console.log(id);
+    modDefec(id);
+    var defect;
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);

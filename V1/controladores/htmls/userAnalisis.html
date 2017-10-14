@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <div id="wrapper">
 
-<!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <div id="imagen_porta"></div>
@@ -61,35 +61,28 @@
                              <dt>Latitud: </dt><dd>{{ model.datos.Latitud }}</dd>
                              <dt>Longitud: </dt><dd>{{ model.datos.Longitud }}</dd> -->
 
-                             <p><strong>Nombre: </strong>{{ model.datos.Nombre }}</p>
-                             <p><strong>Dirección: </strong>{{ model.datos.Direccion }}</p>
-                             <p><strong>Latitud: </strong>{{ model.datos.Latitud }}</p>
-                             <p><strong>Longitud: </strong>{{ model.datos.Longitud }}</p>
+                            <p><strong>Nombre: </strong>{{ model.datos.Nombre }}</p>
+                            <p><strong>Dirección: </strong>{{ model.datos.Direccion }}</p>
+                            <p><strong>Latitud: </strong>{{ model.datos.Latitud }}</p>
+                            <p><strong>Longitud: </strong>{{ model.datos.Longitud }}</p>
 
-                         </dl>
+                        </dl>
                     </div>
 
-                     <div id="map_canvas">
-                         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
-                             <ui-gmap-marker coords="markers.coords" options="markers.options" idkey="markers.idKey">
-                             </ui-gmap-marker>
-                         </ui-gmap-google-map>
-                     </div>
 
-
-                     <div id="graficaY">
-                     <canvas id="EjeY" width="400" height="300"></canvas>
-                     </div>
+                    <div id="graficaY">
+                        <canvas id="EjeY" width="400" height="300"></canvas>
+                    </div>
 
                     <div id="buttonvol">
-                     <a href="#!/userini" class="btn btn-default">Volver</a>
+                        <a href="#!/userini" class="btn btn-default">Volver</a>
                     </div>
 
                     <div id="buttondss">
                         <a href="#!/userelecdefecto" class="btn btn-default">Analisis</a>
                     </div>
                 </div>
-             </div>
-         </div>
-     </div>
- </div>
+            </div>
+        </div>
+    </div>
+</div>
