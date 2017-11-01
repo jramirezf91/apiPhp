@@ -37,8 +37,8 @@ empleadoControllers.controller('usuariosListadoCtrl', ['$scope', '$http', 'auth'
     listadoUsuario();    
     
     function listadoUsuario(){
-        $http.get('http://localhost:80/apiPhp/V1/usuarios/obtenerUsuarios').then(function (r) {
-            //console.log(r.data);
+        $http.get('http://localhost/apiPhp/V1/usuarios/obtenerUsuarios').then(function (r) {
+            console.log(r.data);
             $scope.model = r.data;
         });
     }
@@ -65,7 +65,7 @@ empleadoControllers.controller('listadoEstructurasCtrl', ['$scope', '$http', 'au
     listadoEstructuras();
 
     function listadoEstructuras() {
-        $http.get('http://localhost:80/apiPhp/V1/estructuras/obtenerEstructuras').then(function (r) {
+        $http.get('http://localhost/apiPhp/V1/estructuras/obtenerEstructuras').then(function (r) {
             $scope.model = r.data;
         });
     }
@@ -114,6 +114,7 @@ empleadoControllers.controller('verEstructurasCtrl', ['$scope','$routeParams', '
 }]);
 
 empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '$http', 'auth','$location', function ($scope, $routeParams, $http, auth, $location) {
+   // $scope.foto={value:'0'};
 
     $scope.registrar = function() {
 
@@ -148,18 +149,22 @@ empleadoControllers.controller('registrarUserCtrl', ['$scope', '$routeParams', '
                         $scope.Pass = "";
                         $scope.Direccion = "";
                         $scope.PassR = "";*/
-
+                        $location.url("/user");
 
                     }else if(r.data.estado == 6){
                         alert(r.data.mensaje);
                     }
                 });
-
-                if($scope.checkBox.value){
+                for(var i = 0; i<2000; i++){}
+                //
+                /*//$scope.foto={value:'0'};
+                console.log("Check:  " + $scope.foto.value);
+                if(angular.equals($scope.foto.value, "1")){
                     $location.url("/fotoUser/" + $scope.DNI);
                 }else{
-                    $location.url("/user");
-                }
+
+                    location.href = "http://localhost:63342/apiPhp/V1/controladores/#!/user";
+                }*/
 
             }else{
                 alert("Las contraseñas no coinciden.");
@@ -612,7 +617,7 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
                         pointHoverBackgroundColor: "rgba(75,192,192,1)",
                         pointHoverBorderColor: "rgba(220,220,220,1)",
                         pointHoverBorderWidth: 2,
-                        pointRadius: 1,
+                        pointRadius: 0,
                         pointHitRadius: 10,
                         data: ejey,
                         spanGaps: false
@@ -642,8 +647,8 @@ empleadoControllers.controller('cambiarFotoCtrl', ['$scope', '$routeParams', '$h
 {
 
     var dni = angular.toJson($routeParams);
-    console.log(dni);
-    obtenerFoto(dni);
+    //console.log(dni);
+    //obtenerFoto(dni);
 
     function obtenerFoto($dni){
         $http.post('http://localhost/apiPhp/V1/usuarios/buscarFoto', $dni).then(function (r) {
@@ -714,37 +719,61 @@ empleadoControllers.controller('defectosCtrl', ['$scope', '$http', 'auth', '$roo
 
 }]);
 
-empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
+empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$rootScope', "$location", function ($scope,  $http, auth, $rootScope, $location) {
 
     $scope.rangs = true;
+
+    var iduser = $rootScope.globals.usuario.id;
+    listadoEstructurasUser(iduser);
+
+    $scope.LimitInf = null;
+    $scope.LimitSup = null;
     $scope.rangi = true;
+
+
+
+    function listadoEstructurasUser($id) {
+
+        var user = {
+            idUsuario: $id
+        };
+
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstructurasUser', user).then(function (r) {
+            $scope.model = r.data;
+            console.log($scope.model);
+        });
+    }
+
     $scope.registrarDef = function() {
 
-        console.log($scope.file);
 
-        if(!existDefecto($scope.Nombre)){
+        if(!existDefecto($scope.nombre)){
 
             var user = {
-                Nombre: $scope.Nombre,
-                TipoDefecto: $scope.TipoDefecto,
+                Nombre: $scope.nombre,
+                TipoDefecto: $scope.type,
                 LimitInf: $scope.LimitInf,
                 LimitSup: $scope.LimitSup,
-                Descripcion: $scope.Descripcion
+                Descripcion: $scope.Descripcion,
+                Usuario: iduser,
+                Estructura: $scope.estructura
             };
-
+            console.log(user);
 
             $http.post('http://localhost/apiPhp/V1/defectos/registro', user).then(function (r) {
+                $location.url("/defectos/"+ $rootScope.globals.usuario.id);
+
                 if(r.data.estado == 1){
                     alert(r.data.mensaje);
-                    $scope.Nombre = "";
-                    $scope.LimitInf = "";
-                    $scope.LimitSup = "";
-                    $scope.Descripcion = "";
+
                 }else{
+                    console.log("Error");
                     alert(r.data.mensaje);
                 }
+                //$location.url("/defectos/"+ $rootScope.globals.usuario.id);
             });
-            $location.url("/defectos");
+            //console.log("/defectos/" + iduser);
+
         }else{
             alert("El defecto que desea registrar ya existe en la base de datos.");
         }
@@ -753,10 +782,10 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
     function existDefecto($nom){
 
         var data = {
-            NomDefecto: $nom
+            NomEstructura: $nom
         };
 
-        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefNom', data).then(function (r) {
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoNom', data).then(function (r) {
             if(r.data.estado == 0){
                 return true;
             }else{
@@ -768,46 +797,20 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
 
 
     $scope.cambio = function () {
-        if(angular.equals($scope.TipoDefecto, "Entre")){
+        if(angular.equals($scope.type, "Entre")){
 
             $scope.rangs = true;
             $scope.rangi = true;
 
-        }else if(angular.equals($scope.TipoDefecto, "Por Encima")){
-            $scope.rangs = true;
-            $scope.rangi = false;
-
-        }else if(angular.equals($scope.TipoDefecto, "Por Debajo")){
+        }else if(angular.equals($scope.type, "Por Debajo")){
             $scope.rangs = false;
             $scope.rangi = true;
+
+        }else if(angular.equals($scope.type, "Por Encima")){
+            $scope.rangs = true;
+            $scope.rangi = false;
         }
     };
-
-
-    $scope.logout = function()
-    {
-        auth.logout();
-    }
-
-}]);
-
-empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$http', 'auth', '$rootScope', function ($scope,  $http, auth, $rootScope) {
-
-    listadoDefectosUser($rootScope.globals.usuario.id);
-
-    function listadoDefectosUser($id) {
-
-        var user = {
-            idUsuario: $id
-        };
-
-        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoUser', user).then(function (r) {
-            $scope.model = r.data;
-            console.log($scope.model);
-        });
-    }
-
-
 
 
     $scope.logout = function()
@@ -849,7 +852,7 @@ empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams',
         if(confirm('Esta seguro de modificar este defecto?')){
             var defecto = {
                 Nombre: $scope.Nombre,
-                Tipo: $scope.Tipo,
+                Tipo: $scope.type,
                 LimitInf: $scope.LimitInf,
                 LimitSup: $scope.LimitSup,
                 Descripcion: $scope.Descripcion
@@ -892,12 +895,202 @@ empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams',
 
 }]);
 
+empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$routeParams', '$http', 'auth', '$rootScope', function ($scope, $routeParams,  $http, auth, $rootScope) {
+
+
+    $scope.idEstruc = $routeParams;
+    console.log($scope.idEstruc.idEstructura);
+    listadoDefectosUser($rootScope.globals.usuario.id, $scope.idEstruc.idEstructura);
+
+
+    function listadoDefectosUser($idUser, $idEstructur ) {
+
+        var user = {
+            idUsuario: $idUser,
+            idEstructura: $idEstructur
+        };
+
+
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoEstruc', user).then(function (r) {
+            $scope.model = r.data;
+            console.log($scope.model);
+        });
+    }
+
+
+
+
+    $scope.logout = function()
+    {
+        auth.logout();
+    }
+
+}]);
+
 empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
 
-    var id = angular.toJson($routeParams);
+    var id = $routeParams.idEstructura;
+    var idDef = $routeParams.idDefecto;
     console.log(id);
-    modDefec(id);
-    var defect;
+    console.log(idDef);
+    datosEstructura(id);
+
+
+    /*console.log(estructura);
+    console.log(defect);
+    marca = analisis(defect, estructura);
+    grafica(marca, estructura);*/
+
+    function grafica($marca, $estructura){
+
+        var n = $estructura.Vibraciones;
+
+        var ejey = [];
+
+        var labels = [];
+
+        for(var i = 0; i < n.length; i++){
+            ejey[i] = n[i].Y;
+            labels[i] = "" + n[i].Fecha + " " + n[i].Hora;
+
+        }
+
+        console.log($marca.length);
+        console.log(ejey.length);
+
+        var datasY = {
+            labels: labels,
+            datasets: [
+                {
+                    label: "EjeX",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "#4bc000",
+                    borderColor: "#bec022",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "#c00a14",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 0,
+                    pointHoverBackgroundColor: "#224bc0",
+                    pointHoverBorderColor: "#dcdc01",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: $marca,
+                    pointHitRadius: 10,
+                    data: ejey,
+                    spanGaps: false
+                }
+            ]
+        };
+        var ctx = "EjeY";
+        var myLineChartY = new Chart(ctx, {
+            type: 'line',
+            data: datasY
+        });
+
+
+
+    }
+
+    function defectodatos($idDefecto) {
+        var user = {
+            idDefecto: $idDefecto
+        };
+
+        $http.post('http://localhost/apiPhp/V1/defectos/obtenerDefectoId', user).then(function (r) {
+            $scope.defect = r.data;
+            console.log($scope.defect);
+            var marca = analisis($scope.defect.datos, $scope.estructura.datos);
+            grafica(marca, $scope.estructura.datos);
+        });
+    }
+
+    function datosEstructura($idEstructura){
+        var user = {
+            idEstructura: $idEstructura
+        };
+
+        console.log(user);
+
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstruc', user).then(function (p) {
+            console.log(p.data);
+            $scope.estructura = p.data;
+            defectodatos(idDef);
+        });
+    }
+
+    function analisis($defect, $estructura) {
+
+        var tipo = $defect.TipoDefecto;
+        console.log($estructura);
+        var vib = $estructura.Vibraciones;
+        var marca;
+        console.log(tipo);
+        console.log(vib);
+
+        if(angular.equals(tipo, "Entre")){
+            marca = analisisentre($defect.LimitInf, $defect.LimitSup, vib);
+        }else if(angular.equals(tipo, "Por Encima")){
+            marca =analisisencima($defect.LimitSup, vib);
+        }else if(angular.equals(tipo, "Por Debajo")){
+            marca = analisisdebajo($defect.LimitInf, vib);
+        }
+        console.log(marca);
+        return marca;
+
+    }
+    
+    function analisisentre($limInf, $limSup, $vib) {
+
+        var marcas = [];
+        console.log($vib[1]);
+        console.log($vib.length);
+
+        for(var i= 0 ; i<$vib.length; i++){
+
+            if(parseInt($vib[i].Y)<$limSup && parseInt($vib[i].Y)>$limInf){
+                marcas[i] = 2;
+            }else{
+                marcas[i] = 0;
+            }
+        }
+        console.log(marcas);
+        return marcas;
+        
+    }
+    
+    function analisisencima($limSup, $vib){
+        var marcas = [];
+
+        for(var i= 0 ; i<$vib.length; i++){
+
+            if(parseInt($vib[i].Y)>parseInt($limSup)){
+
+                marcas[i] = 2;
+            }else{
+                marcas[i] = 0;
+            }
+        }
+        return marcas;
+    }
+    
+    function analisisdebajo($limInf, $vib) {
+
+        var marcas = [];
+
+        for(var i= 0 ; i<$vib.length; i++){
+
+            if( parseInt($vib[i].Y)<$limInf){
+                marcas[i] =2;
+            }else{
+                marcas[i] = 0;
+            }
+        }
+        return marcas;
+    }
 
 
     $scope.logout = function()

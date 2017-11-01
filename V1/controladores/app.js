@@ -84,15 +84,15 @@ app.config(['$routeProvider',
               templateUrl: 'htmls/addDefecto.html',
               controller: 'addDefectosCtrl'
           })
-          .when('/userelecdefecto', {
+          .when('/userelecdefecto/:idEstructura', {
               templateUrl: 'htmls/userelecdefecto.html',
               controller: 'userelecdefectoCtrl'
           })
-          .when('/editarDefecto', {
+          .when('/editarDefecto/:idDefecto', {
               templateUrl: 'htmls/modificarDefecto.html',
               controller: 'modificarDefectoCtrl'
           })
-          .when('/analisis', {
+          .when('/analisis/:idEstructura/:idDefecto', {
               templateUrl: 'htmls/UserAnalisis.html',
               controller: 'analisisCtrl'
           })

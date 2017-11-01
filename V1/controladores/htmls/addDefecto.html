@@ -52,13 +52,19 @@
                 <div class="col-xs-12">
                     <form name="formulario" ng-submit="registrarDef()">
                         <div class="form-group">
-                            Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="Nombre" ng-required="true" ng-maxlength="40" ng-minlength="3">
+                            Nombre: <input type="text" class="form-control" placeholder="Nombre" ng-model="nombre" ng-required="true" ng-maxlength="40" ng-minlength="3">
                             <span ng-show="formulario.Nombre.$error.required && formulario.Nombre.$dirty">El nombre es necesario.</span>
                             <span ng-show="formulario.Nombre.$error.maxlength">Debe contener 40 caracteres como maximo..</span>
                             <span ng-show="formulario.Nombre.$error.minlength">Debe contener 3 caracteres como minimo.</span>
                         </div>
                         <div class="form-group">
-                            Tipo: <select ng-model="TipoDefecto"  ng-change="cambio()" class="form-control">
+                            Estructura:
+                            <select ng-model="estructura" >
+                                    <option value="{{item.idEstructura}}" ng-repeat="item in model.datos">{{item.Nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            Tipo: <select ng-model="type"  ng-change="cambio()" class="form-control">
                                     <option value=""></option>
                                     <option value="Entre" >Entre</option>
                                     <option value="Por Encima">Por Encima</option>
@@ -69,7 +75,7 @@
                             Rango Inferior: <input ng-show="rangi" type="number" class="form-control" placeholder="LimitInf" ng-model="LimitInf" ng-required="false" >
                         </div>
                         <div class="form-group">
-                            Rango Superior: <input ng-show="rangs" ng-disabled="angular.equals($scope.TipoDefecto, 'Por Debajo')" type="number" class="form-control" placeholder="LimitSup" ng-model="LimitSup" ng-required="true">
+                            Rango Superior: <input ng-show="rangs" type="number" class="form-control" placeholder="LimitSup" ng-model="LimitSup" ng-required="false">
                         </div>
                         <div class="form-group">
                             Descripcion: <input type="text" class="form-control" placeholder="Descripcion" ng-model="Descripcion" ng-required="false" ng-maxlength="400" ng-minlength="3" >

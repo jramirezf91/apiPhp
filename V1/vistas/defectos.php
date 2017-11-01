@@ -8,6 +8,7 @@
  */
 class defectos
 {
+    #region Variables constantes
     const ESTADO_URL_INCORRECTA = 2;
     const ESTADO_EXITO = 1;
     const ESTADO_ERROR = 4;
@@ -25,9 +26,11 @@ class defectos
     const LIMITSUP = "LimitSup";
     const USUARIO = "Usuario";
     const DESCRIPCION = "Descripcion";
+    const ESTRUCTURA = "Estructura";
+    #endregion
 
 
-
+    #region Funciones https
     public static function post($peticion)
     {
         if ($peticion[0] == 'registro') {
@@ -36,6 +39,8 @@ class defectos
             return self::obtenerDefectoId();
         } else if ($peticion[0] == 'obtenerDefectoUser') {
             return self::obtenerDefectoUser();
+        }else if($peticion[0] == 'obtenerDefectoEstruc'){
+            return self::obtenerDefectoEstruc();
         }else if($peticion[0] == 'obtenerDefecto') {
             return self::obtenerDefecto();
         }else if($peticion[0] == 'obtenerDefectoNom'){
@@ -94,12 +99,14 @@ class defectos
         }
     }
 
+    #endregion
+
+    #region Post
     public static function registrar(){
         $cuerpo = file_get_contents('php://input');
-        $defecto = json_decode($cuerpo);
+        $defec = json_decode($cuerpo);
 
-
-        $resultado = self::crear($defecto);
+        $resultado = self::crear($defec);
 
         switch ($resultado){
             case self::ESTADO_EXITO:
@@ -122,11 +129,12 @@ class defectos
     public static function crear($defecto){
 
         $nombre = $defecto->Nombre;
-        $tipo = $defecto->tipo;
-        $limitinf = $defecto->limitinf;
-        $limitsup = $defecto->limitsup;
-        $descripcion = $defecto->descripcion;
-        $usuario = $defecto->usuario;
+        $tipo = $defecto->TipoDefecto;
+        $limitinf = $defecto->LimitInf;
+        $limitsup = $defecto->LimitSup;
+        $descripcion = $defecto->Descripcion;
+        $usuario = $defecto->Usuario;
+        $estructura = $defecto->Estructura;
 
         try{
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
@@ -139,8 +147,9 @@ class defectos
                 self::LIMITINF . "," .
                 self::LIMITSUP . "," .
                 self::DESCRIPCION . "," .
-                self::USUARIO . ")" .
-                " VALUES(?,?,?,?,?,?)";
+                self::USUARIO . "," .
+                self::ESTRUCTURA . ")" .
+                " VALUES(?,?,?,?,?,?,?)";
 
             $sentencia = $pdo->prepare($comando);
 
@@ -150,6 +159,7 @@ class defectos
             $sentencia->bindParam(4, $limitsup);
             $sentencia->bindParam(5, $descripcion);
             $sentencia->bindParam(6, $usuario);
+            $sentencia->bindParam(7, $estructura);
 
             $resultado = $sentencia->execute();
 
@@ -187,7 +197,7 @@ class defectos
 
                     $respuesta["idDefecto"] = $usuarioBD["idDefecto"];
                     $respuesta["Nombre"] = $usuarioBD["Nombre"];
-                    $respuesta["Tipo"] = $usuarioBD["Tipo"];
+                    $respuesta["TipoDefecto"] = $usuarioBD["TipoDefecto"];
                     $respuesta["LimitInf"] = $usuarioBD["LimitInf"];
                     $respuesta["LimitSup"] = $usuarioBD["LimitSup"];
                     $respuesta["Descripcion"] = $usuarioBD["Descripcion"];
@@ -256,19 +266,41 @@ class defectos
 
     }
 
-    public static function obtenerDefectos(){
+    public static function obtenerDefectoEstruc(){
+
+        $respuesta = array();
+        $body = file_get_contents('php://input');
+        $defecto = json_decode($body);
+        $idEstruc = $defecto->idEstructura;
+        $idUser = $defecto->idUsuario;
+
         try{
-            $comando = "SELECT * FROM " . self::NOMBRE_TABLA;
+            $comando = "SELECT ". self::ID_DEFECTO . "," . self::NOMBRE . " FROM " . self::NOMBRE_TABLA .
+                " WHERE " .self::ESTRUCTURA . "=? && " . self::USUARIO . "=?";
 
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            $sentencia->bindParam(1, $idEstruc, PDO::PARAM_INT);
+            $sentencia->bindParam(2, $idUser, PDO::PARAM_INT);
 
             if($sentencia->execute()){
-                http_response_code(200);
-                return
-                    [
-                        "estado" => self::ESTADO_EXITO,
-                        "datos" => $sentencia->fetchAll(PDO::FETCH_ASSOC)
-                    ];
+                if($sentencia->rowCount() > 0) {
+                    $usuarioBD = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+                    http_response_code(200);
+
+                    return
+                        [
+                            "estado" => self::ESTADO_EXITO,
+                            "datos" => $usuarioBD
+                        ];
+                }else{
+                    return
+                        [
+                            "estado" => self::ESTADO_NO_ENCONTRADO,
+                            "mensaje" => "La estructura no tiene defectos asociados",
+                            "datos" => null
+
+                        ];
+                }
             }else{
                 throw  new ExcepcionApi(self::ESTADO_ERROR, "Se ha producido un error");
             }
@@ -276,6 +308,7 @@ class defectos
         }catch (PDOException $e){
             throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
         }
+
     }
 
     public static function obtenerDefectoNom(){
@@ -314,7 +347,7 @@ class defectos
 
     }
 
-    public static function obtenerEstruc(){
+    public static function obtenerDefecto(){
 
         $respuesta = array();
         $body = file_get_contents('php://input');
@@ -336,7 +369,7 @@ class defectos
 
                 $respuesta["idDefecto"] = $usuarioBD["idDefecto"];
                 $respuesta["Nombre"] = $usuarioBD["Nombre"];
-                $respuesta["Tipo"] = $usuarioBD["Tipo"];
+                $respuesta["TipoDefecto"] = $usuarioBD["TipoDefecto"];
                 $respuesta["LimiteInf"] = $usuarioBD["LimiteInf"];
                 $respuesta["LimiteSup"] = $usuarioBD["LimiteSup"];
                 $respuesta["Descripcion"] = $usuarioBD["Descripcion"];
@@ -357,6 +390,33 @@ class defectos
 
     }
 
+    #endregion
+
+    #region Get
+    public static function obtenerDefectos(){
+        try{
+            $comando = "SELECT * FROM " . self::NOMBRE_TABLA;
+
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+
+            if($sentencia->execute()){
+                http_response_code(200);
+                return
+                    [
+                        "estado" => self::ESTADO_EXITO,
+                        "datos" => $sentencia->fetchAll(PDO::FETCH_ASSOC)
+                    ];
+            }else{
+                throw  new ExcepcionApi(self::ESTADO_ERROR, "Se ha producido un error");
+            }
+
+        }catch (PDOException $e){
+            throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
+        }
+    }
+    #endregion
+
+    #region put
     public static function actualizar($defecto, $idDefecto){
 
         $Nombre = $defecto->Nombre;
@@ -392,6 +452,9 @@ class defectos
 
     }
 
+    #endregion
+
+    #region delete
     public static function eliminar($idDefecto){
         try{
             $comando = "DELETE FROM " . self::NOMBRE_TABLA .
@@ -408,5 +471,6 @@ class defectos
             throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
         }
     }
+    #endregion
 
 }

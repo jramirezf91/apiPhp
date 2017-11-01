@@ -105,7 +105,9 @@ class estructuras
     public static function registrar(){
         $cuerpo = file_get_contents('php://input');
         $estructura = json_decode($cuerpo);
-
+        echo "antes echo";
+        echo $estructura;
+        echo "despues echo";
 
         $resultado = self::crear($estructura);
 
@@ -497,20 +499,29 @@ class estructuras
 
             $sentencia->bindParam(1, $idEstructura);
 
+            $comandovib = "SELECT COUNT(*) FROM " . self::NOMBRE_TABLA2 .
+                " WHERE " .self::ESTRUCTURA . "=?";
 
-            $comando2 = "DELETE FROM " .self::NOMBRE_TABLA2 .
-                " WHERE " . self::ESTRUCTURA . "=?";
 
-            $sentencia2 = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando2);
-            $sentencia2->bindParam(1, $idEstructura);
-            $sentencia2->execute();
+            $sentencia3 = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comandovib);
+            $sentencia3->bindParam(1, $idEstructura);
+            $sentencia3->execute();
 
-            if($sentencia2->rowCount() > 0) {
-                $sentencia->execute();
-                return $sentencia->rowCount();
-            }else{
-                return 0;
+
+            if($sentencia3->fetchColumn() > 0){
+
+                $comando2 = "DELETE FROM " .self::NOMBRE_TABLA2 .
+                    " WHERE " . self::ESTRUCTURA . "=?";
+
+                $sentencia2 = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando2);
+                $sentencia2->bindParam(1, $idEstructura);
+                $sentencia2->execute();
+
             }
+
+            $sentencia->execute();
+            return $sentencia->rowCount();
+
 
         }catch (PDOException $e){
             throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());

@@ -37,7 +37,7 @@ class usuarios
             return self::loguear();
         }else if($peticion[0] == 'obtenerUsuariosId'){
             return self::obtenerUsuarioId();
-        }else if($peticion[0] == "buscarFoto"){
+        }else if($peticion[0] == 'buscarFoto'){
             return self::buscarFoto();
         }
         else{
