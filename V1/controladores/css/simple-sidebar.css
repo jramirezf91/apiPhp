@@ -189,33 +189,27 @@ toldbar
     float: left;
 }
 
-#graficaX{
-    padding-top: 2%;
-    width: 500px;
-    height: 500px;
-    float: left;
-}
 
 #graficaY{
     padding-top: 2%;
-    float: left;
-    left: 30%;
+    margin-left: auto;
+    margin-right: auto;
     width: 500px;
     height: 500px;
 }
 
-#graficaZ{
-    padding-top: 2%;
-    float: left;
-    width: 500px;
-    height: 500px;
-}
 
 
 #buttonvol{
     position: absolute;
     right: 20%;
-    padding-top: 25% ;
+
+}
+
+#buttondss{
+    position: absolute;
+    right: 30%;
+
 }
 
 

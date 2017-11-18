@@ -823,6 +823,8 @@ empleadoControllers.controller('addDefectosCtrl', ['$scope', '$http', 'auth', '$
 empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
 
     var id = angular.toJson($routeParams);
+    $scope.rangs = true;
+    $scope.rangi = true;
     console.log(id);
     modDefec(id);
     var defect;
@@ -834,11 +836,12 @@ empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams',
             console.log(r.data);
             defect = r.data.datos;
             $scope.Nombre = r.data.datos.Nombre;
-            $scope.Tipo = r.data.datos.Tipo;
-            $scope.LimitInf = r.data.datos.LimitInf;
-            $scope.LimitSup = r.data.datos.LimitSup;
+            $scope.type = r.data.datos.TipoDefecto;
+            $scope.LimitInf = parseInt(r.data.datos.LimitInf);
+            $scope.LimitSup = parseInt(r.data.datos.LimitSup);
             $scope.Descripcion= r.data.datos.Descripcion;
             $scope.idDefecto = r.data.datos.idDefecto;
+            $scope.cambio();
         })
     }
 
@@ -852,7 +855,7 @@ empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams',
         if(confirm('Esta seguro de modificar este defecto?')){
             var defecto = {
                 Nombre: $scope.Nombre,
-                Tipo: $scope.type,
+                TipoDefecto: $scope.type,
                 LimitInf: $scope.LimitInf,
                 LimitSup: $scope.LimitSup,
                 Descripcion: $scope.Descripcion
@@ -873,16 +876,16 @@ empleadoControllers.controller('modificarDefectoCtrl', ['$scope','$routeParams',
     };
 
     $scope.cambio = function () {
-        if(angular.equals($scope.TipoDefecto, "Entre")){
+        if(angular.equals($scope.type, "Entre")){
 
             $scope.rangs = true;
             $scope.rangi = true;
 
-        }else if(angular.equals($scope.TipoDefecto, "Por Encima")){
+        }else if(angular.equals($scope.type, "Por Encima")){
             $scope.rangs = true;
             $scope.rangi = false;
 
-        }else if(angular.equals($scope.TipoDefecto, "Por Debajo")){
+        }else if(angular.equals($scope.type, "Por Debajo")){
             $scope.rangs = false;
             $scope.rangi = true;
         }

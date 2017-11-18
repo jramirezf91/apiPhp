@@ -420,9 +420,9 @@ class defectos
     public static function actualizar($defecto, $idDefecto){
 
         $Nombre = $defecto->Nombre;
-        $Tipo = $defecto->Tipo;
-        $LimiteInf = $defecto->LimiteInf;
-        $LimiteSup = $defecto->LimiteSup;
+        $Tipo = $defecto->TipoDefecto;
+        $LimiteInf = $defecto->LimitInf;
+        $LimiteSup = $defecto->LimitSup;
         $Descripcion = $defecto->Descripcion;
 
         try{
@@ -430,9 +430,9 @@ class defectos
                 " SET " .  self::NOMBRE . "=?," .
                 self::TIPO . "=?," .
                 self::LIMITINF . "=?," .
-                self::LIMITSUP . "=?" .
+                self::LIMITSUP . "=?, " .
                 self::DESCRIPCION . "=?" .
-                " WHERE " . self::ID_ESTRUCTURA . "=?";
+                " WHERE " . self::ID_DEFECTO . "=?";
 
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($consulta);
 
