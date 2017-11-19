@@ -935,6 +935,7 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
 
     var id = $routeParams.idEstructura;
     var idDef = $routeParams.idDefecto;
+    $scope.numdefectos = 0;
     console.log(id);
     console.log(idDef);
     datosEstructura(id);
@@ -1056,6 +1057,7 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
         for(var i= 0 ; i<$vib.length; i++){
 
             if(parseInt($vib[i].Y)<$limSup && parseInt($vib[i].Y)>$limInf){
+                $scope.numdefectos= $scope.numdefectos+1;
                 marcas[i] = 2;
             }else{
                 marcas[i] = 0;
@@ -1069,10 +1071,11 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
     function analisisencima($limSup, $vib){
         var marcas = [];
 
+
         for(var i= 0 ; i<$vib.length; i++){
 
             if(parseInt($vib[i].Y)>parseInt($limSup)){
-
+                $scope.numdefectos= $scope.numdefectos+1;
                 marcas[i] = 2;
             }else{
                 marcas[i] = 0;
@@ -1088,6 +1091,7 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
         for(var i= 0 ; i<$vib.length; i++){
 
             if( parseInt($vib[i].Y)<$limInf){
+                $scope.numdefectos= $scope.numdefectos+1;
                 marcas[i] =2;
             }else{
                 marcas[i] = 0;
