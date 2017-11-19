@@ -491,7 +491,7 @@ class usuarios
             if(strcmp($contrasena, "") != 0){
                 $contrasenaEncriptada = self::encriptarContrasena($contrasena);
                 $consulta2 = "UPDATE " . self::NOMBRE_TABLA .
-                    " SET " . self::CONTRASENA . "=?," .
+                    " SET " . self::CONTRASENA . "=?" .
                     " WHERE " . self::ID_USUARIO . "=?";
                 $sentencia2 = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($consulta2);
 
