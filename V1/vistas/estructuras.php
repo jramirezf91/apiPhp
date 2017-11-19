@@ -105,9 +105,7 @@ class estructuras
     public static function registrar(){
         $cuerpo = file_get_contents('php://input');
         $estructura = json_decode($cuerpo);
-        echo "antes echo";
-        echo $estructura;
-        echo "despues echo";
+
 
         $resultado = self::crear($estructura);
 

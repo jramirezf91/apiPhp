@@ -299,11 +299,12 @@ empleadoControllers.controller('registrarEstructuraCtrl', ['$scope', '$routePara
                     $scope.Direccion = "";
                     $scope.Latitud = "";
                     $scope.Longitud = "";
+                    $location.url("/estructuras");
                 }else{
                     alert(r.data.mensaje);
                 }
            });
-           $location.url("/estructuras");
+          // $location.url("/estructuras");
         }else{
             alert("La estructura que desea registrar ya existe en la base de datos.");
         }
