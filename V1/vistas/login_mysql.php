@@ -9,4 +9,4 @@
 define("NOMBRE_HOST", "localhost");
 define("BASE_DE_DATOS", "dss");
 define("USUARIO", "root");
-define("CONTRASENA", "");
+define("CONTRASENA", "root");

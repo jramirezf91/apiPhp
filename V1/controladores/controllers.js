@@ -905,6 +905,10 @@ empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$routeParams',
     $scope.idEstruc = $routeParams;
     console.log($scope.idEstruc.idEstructura);
     listadoDefectosUser($rootScope.globals.usuario.id, $scope.idEstruc.idEstructura);
+    $rootScope.globals.diainicio = new Date();
+    $rootScope.globals.diafin = new Date();
+    $rootScope.globals.diainicio = $rootScope.globals.diafin.getDate()-1;
+
 
 
     function listadoDefectosUser($idUser, $idEstructur ) {
