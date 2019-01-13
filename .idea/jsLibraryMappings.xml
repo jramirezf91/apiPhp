@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Chart, angular, angular-chart, angular-cookies, angular-google-maps, angular-route, angular-simple-logger, html2canvas, jspdf, lodash}" />
-    <includedPredefinedLibrary name="WebGL" />
+    <file url="PROJECT" libraries="{Chart, angular, angular-animate, angular-aria, angular-chart, angular-cookies, angular-google-maps, angular-material, angular-messages, angular-route, angular-simple-logger, html2canvas, jspdf, lodash, pdfmake, ui-bootstrap-tpls-2.5.0, vfs_fonts}" />
   </component>
 </project>

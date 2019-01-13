@@ -1,7 +1,7 @@
 /**
  * Created by Juanito-PC on 10/12/2016.
  */
-var empleadoControllers = angular.module('empleadoControllers', ['uiGmapgoogle-maps', 'chart.js']);
+var empleadoControllers = angular.module('empleadoControllers', ['uiGmapgoogle-maps', 'chart.js', 'ui.bootstrap', 'ngAnimate']);
 
 empleadoControllers.controller('datosUsuarioCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth) {
 
@@ -420,7 +420,8 @@ empleadoControllers.controller('loginCtrl',['$scope', '$rootScope', '$location',
                                 id: r.data.usuario.idUsuario,
                                 permiso: r.data.usuario.Permiso,
                                 perm: per,
-                                foto: r.data.usuario.Foto
+                                Nombre: r.data.usuario.Nombre,
+                                Apellido: r.data.usuario.Apellido
                             }
                         };
                         console.log("salir rootscope");
@@ -907,9 +908,31 @@ empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$routeParams',
     listadoDefectosUser($rootScope.globals.usuario.id, $scope.idEstruc.idEstructura);
     $rootScope.globals.diainicio = new Date();
     $rootScope.globals.diafin = new Date();
-    $rootScope.globals.diainicio = $rootScope.globals.diafin.getDate()-1;
+    $rootScope.globals.diainicio.setDate($rootScope.globals.diainicio.getDate()-1);
+    console.log($rootScope.globals.diainicio);
+    console.log($rootScope.globals.diafin);
 
+    $scope.dateOptions = {
+        dateDisabled: disabled,
+        formatYear: 'yy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+    };
 
+    function disabled(data) {
+        var date = data.date,
+            mode = data.mode;
+        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    }
+
+    $scope.open2 = function() {
+        $scope.popup2.opened = true;
+    };
+
+    $scope.popup2 = {
+        opened: false
+    };
 
     function listadoDefectosUser($idUser, $idEstructur ) {
 
@@ -935,15 +958,71 @@ empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$routeParams',
 
 }]);
 
-empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', function ($scope, $routeParams, $http, auth, $location) {
+empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http', 'auth', '$location', '$rootScope', function ($scope, $routeParams, $http, auth, $location, $rootScope) {
 
     var id = $routeParams.idEstructura;
     var idDef = $routeParams.idDefecto;
+    var date = new Date();
+
     $scope.numdefectos = 0;
     console.log(id);
     console.log(idDef);
     datosEstructura(id);
 
+    $scope.export = function() {
+
+        html2canvas(document.getElementById('graficaY'), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    footer: {
+                        columns: [
+                            'Creado por ' + $rootScope.globals.usuario.Nombre + ' ' + $rootScope.globals.usuario.Apellido,
+                            { text: date.getDate() +'/' +  (date.getMonth()+1) + '/' + date.getFullYear() , alignment: 'right', paddingRight:10 }
+                        ]
+                    },
+                    content: [
+                        {
+                           text: $scope.estructura.datos.Nombre + '\n\n',
+                           style: 'header',
+                           decoration: 'underline',
+                           alignment: 'center'
+                        },
+                        {
+                            columns: [
+                                {
+                                    bold: true,
+                                    fontsize: 15,
+                                    width: 90,
+                                    text:'Dirección: \n Defecto: \n Encontrados: \n\n'
+                                },
+                                {
+                                    text: $scope.estructura.datos.Direccion + '\n' + $scope.defect.datos.Nombre + '\n' + $scope.numdefectos + '\n\n\n'
+                                }
+                            ]
+                        },
+                        {
+                            text: "Grafica\n",
+                            style:'header',
+                            alignment: 'center'
+                        },
+                        {
+                        image: data,
+                        width: 500
+                        }
+                    ],
+                    styles: {
+                        header: {
+                            fontSize: 30,
+                            bold: true
+
+                        }
+                    }
+                };
+                pdfMake.createPdf(docDefinition).download($scope.estructura.datos.Nombre + ".pdf");
+            }
+        });
+    };
 
     /*console.log(estructura);
     console.log(defect);
@@ -1103,6 +1182,8 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
         }
         return marcas;
     }
+
+
 
 
     $scope.logout = function()

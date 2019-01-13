@@ -164,9 +164,22 @@ toldbar
 
 #panel1{
     width: 50%;
-    position: absolute;
+    position: relative;
     left:20%;
 }
+
+#calendar1{
+    width: 18%;
+    position: relative;
+    left:20%;
+}
+
+#calendar2{
+    width: 18%;
+    position: relative;
+    left:20%;
+}
+
 
 #listaestruc{
     position: relative;
@@ -192,10 +205,13 @@ toldbar
 
 #graficaY{
     padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
     margin-left: auto;
     margin-right: auto;
     width: 500px;
-    height: 500px;
+    height: 400px;
+    background: white;
 }
 
 
@@ -203,6 +219,12 @@ toldbar
 #buttonvol{
     position: absolute;
     right: 20%;
+
+}
+
+#buttonpdf{
+    position: absolute;
+    right: 30%;
 
 }
 

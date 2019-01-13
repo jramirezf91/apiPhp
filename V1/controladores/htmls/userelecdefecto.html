@@ -50,6 +50,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
+
                     <div id="panel1" class="panel panel-default">
                         <div class="panel-heading">
                             Listado de defectos
@@ -67,18 +68,25 @@
                                 </td>
                             </tr>
                         </table>
-                        <div layout-gt-xs="row">
-                        <div flex-gt-xs>
-                            <h4>Fecha inicio</h4>
-                            <md-datepicker ng-model="diainicio" md-placeholder="Enter date"></md-datepicker>
-                        </div>
-                        <div flex-gt-xs>
-                            <h4>Fecha fin</h4>
-                            <md-datepicker ng-model="diafin" md-placeholder="Enter date"></md-datepicker>
-                        </div>
-                        </div>
-
                     </div>
+                    <div id="calendar1">
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="globals.diainicio" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+
+
+                   <div id="calendar2">
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="globals.diafin" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                   </div>
                 </div>
             </div>
         </div>

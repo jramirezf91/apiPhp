@@ -49,7 +49,7 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12">
+                <div id="export" class="col-xs-12">
                     <!-- <div class="panel panel-default"> -->
                     <h1><span style="text-decoration: underline;"><strong>{{ estructura.datos.Nombre }}</strong></span></h1>
 
@@ -76,8 +76,10 @@
                         <canvas id="EjeY" width="400" height="300"></canvas>
                     </div>
                     <div id="buttonpdf">
-                        <button (click)="generarPDF()" class="btn btn-info">Crear PDF</button>
+                        <button ng-click="export()" class="btn btn-default">Informe</button>
+                        <!--<button (click)="generarPDF()" class="btn btn-info">Crear PDF</button>-->
                     </div>
+
                     <div id="buttonvol">
                         <a href="#!/userini" class="btn btn-default">Volver</a>
                     </div>
