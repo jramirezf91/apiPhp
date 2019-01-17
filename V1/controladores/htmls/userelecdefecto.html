@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div id="wrapper">
+<div id="wrapper" xmlns:popup-placement="http://www.w3.org/1999/xhtml">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -70,18 +70,20 @@
                         </table>
                     </div>
                     <div id="calendar1">
+                        Dia Inicio:
                         <p class="input-group">
-                            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="globals.diainicio" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <input type="text" class="form-control" popup-placement="auto right-bottom" uib-datepicker-popup="dd-MM-yyyy" ng-model="globals.diainicio" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button type="button" class="btn btn-default" ng-click="open1()" ><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
                     </div>
 
 
                    <div id="calendar2">
+                       Dia Fin:
                         <p class="input-group">
-                            <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy" ng-model="globals.diafin" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                            <input type="text" class="form-control" popup-placement="auto bottom-right" uib-datepicker-popup="dd-MM-yyyy" ng-model="globals.diafin" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>

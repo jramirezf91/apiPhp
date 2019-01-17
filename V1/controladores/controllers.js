@@ -556,15 +556,37 @@ empleadoControllers.controller('delestrucCtrl', ['$scope', '$http', 'auth', '$ro
 
 empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams', '$http', 'auth', function ($scope, $routeParams, $http, auth){
 
-    var id = angular.toJson($routeParams);
+    //var id = angular.toJson($routeParams);
+    var id = $routeParams;
     console.log(id);
+    $scope.diainicio = new Date();
+    $scope.diafin = new Date();
+    $scope.diainicio.setDate($scope.diainicio.getDate()-1);
+    var num =$scope.diainicio.getMonth()+1;
+    var inicio = $scope.diainicio.getFullYear()+"-"+num+"-"+$scope.diainicio.getDate();
+    num = $scope.diafin.getMonth()+1;
+    var fin = $scope.diafin.getFullYear()+"-"+num+"-"+$scope.diafin.getDate();
+    console.log($scope.diainicio);
+    console.log($scope.diafin);
+    console.log(inicio);
+    console.log(fin);
     datosEstructura(id);
+
+
 
     function datosEstructura($idEstructura){
 
         var prueba;
+        var user = {
+            idEstructura: $idEstructura.idEstructura,
+            inicio: inicio,
+            fin: fin
+        };
 
-        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstruc', $idEstructura).then(function (r) {
+        console.log(user);
+
+
+        $http.post('http://localhost/apiPhp/V1/estructuras/obtenerEstruc', user).then(function (r) {
             console.log(r.data);
             prueba = r.data;
             $scope.model = r.data;
@@ -916,8 +938,9 @@ empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$routeParams',
         dateDisabled: disabled,
         formatYear: 'yy',
         maxDate: new Date(2020, 5, 22),
-        minDate: new Date(),
+        minDate: new Date(2000,1,1),
         startingDay: 1
+
     };
 
     function disabled(data) {
@@ -931,6 +954,14 @@ empleadoControllers.controller('userelecdefectoCtrl', ['$scope', '$routeParams',
     };
 
     $scope.popup2 = {
+        opened: false
+    };
+
+    $scope.open1 = function() {
+        $scope.popup1.opened = true;
+    };
+
+    $scope.popup1 = {
         opened: false
     };
 
@@ -1098,7 +1129,9 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
 
     function datosEstructura($idEstructura){
         var user = {
-            idEstructura: $idEstructura
+            idEstructura: $idEstructura,
+            inicio: $rootScope.globals.diainicio.getFullYear()+"-"+ $rootScope.globals.diainicio.getMonth()+"-"+ $rootScope.globals.diainicio.getDate(),
+            fin: $rootScope.globals.diafin.getFullYear()+"-"+$rootScope.globals.diafin.getMonth()+"-"+$rootScope.globals.diafin.getDate()
         };
 
         console.log(user);

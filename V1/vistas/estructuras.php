@@ -260,8 +260,11 @@ class estructuras
         $estructura = json_decode($body);
         $idEstruc = $estructura->idEstructura;
 
-        $hoy = date("Y-m-d");
-        $anterior = date("Y-m-d", strtotime('-1 month') );
+        $hoy = $estructura->inicio;
+        $anterior = $estructura->fin;
+
+        //$hoy = date("Y-m-d");
+        //$anterior = date("Y-m-d", strtotime('-1 month') );
 
         try{
             $comando = "SELECT * FROM " . self::NOMBRE_TABLA .
