@@ -561,11 +561,11 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
     console.log(id);
     $scope.diainicio = new Date();
     $scope.diafin = new Date();
-    $scope.diainicio.setDate($scope.diainicio.getDate()-1);
+    $scope.diainicio.setDate($scope.diainicio.getDate());
     var num =$scope.diainicio.getMonth()+1;
-    var inicio = $scope.diainicio.getFullYear()+"-"+num+"-"+$scope.diainicio.getDate();
+    var inicio = $scope.diainicio.getFullYear()+"-"+num+"-0"+$scope.diainicio.getDate();
     num = $scope.diafin.getMonth()+1;
-    var fin = $scope.diafin.getFullYear()+"-"+num+"-"+$scope.diafin.getDate();
+    var fin = $scope.diafin.getFullYear()+"-"+num+"-0"+$scope.diafin.getDate();
     console.log($scope.diainicio);
     console.log($scope.diafin);
     console.log(inicio);
@@ -579,8 +579,8 @@ empleadoControllers.controller('userverEstructurasCtrl', ['$scope','$routeParams
         var prueba;
         var user = {
             idEstructura: $idEstructura.idEstructura,
-            inicio: inicio,
-            fin: fin
+            inicio: fin,
+            fin: inicio
         };
 
         console.log(user);
@@ -1128,10 +1128,15 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
     }
 
     function datosEstructura($idEstructura){
+
+        $mesIni = $rootScope.globals.diainicio.getMonth()+1;
+        $mesfin = $rootScope.globals.diafin.getMonth()+1
+
         var user = {
             idEstructura: $idEstructura,
-            inicio: $rootScope.globals.diainicio.getFullYear()+"-"+ $rootScope.globals.diainicio.getMonth()+"-"+ $rootScope.globals.diainicio.getDate(),
-            fin: $rootScope.globals.diafin.getFullYear()+"-"+$rootScope.globals.diafin.getMonth()+"-"+$rootScope.globals.diafin.getDate()
+            inicio: $rootScope.globals.diafin.getFullYear()+"-"+$mesfin+"-0"+$rootScope.globals.diafin.getDate(),
+            fin: $rootScope.globals.diainicio.getFullYear()+"-"+ $mesIni+"-0"+ $rootScope.globals.diainicio.getDate()
+            //fin: $rootScope.globals.diafin.getFullYear()+"-"+$mesfin+"-0"+$rootScope.globals.diafin.getDate()
         };
 
         console.log(user);
