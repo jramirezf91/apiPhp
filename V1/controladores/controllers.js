@@ -1130,7 +1130,7 @@ empleadoControllers.controller('analisisCtrl', ['$scope','$routeParams', '$http'
     function datosEstructura($idEstructura){
 
         $mesIni = $rootScope.globals.diainicio.getMonth()+1;
-        $mesfin = $rootScope.globals.diafin.getMonth()+1
+        $mesfin = $rootScope.globals.diafin.getMonth()+1;
 
         var user = {
             idEstructura: $idEstructura,
